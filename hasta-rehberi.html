@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta & Ziyaretçi Rehberi - İbni Sina Hastanesi</title>
+    <meta name="description" content="İbni Sina Hastanesi Hasta ve Ziyaretçi Rehberi. Ziyaret saatleri, refakatçi politikamız, hasta hakları ve sıkça sorulan sorular.">
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .page-header {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 110px 0;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 4px solid var(--champagne);
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(9, 32, 63, 0.75); /* Dark Navy Masking */
+            z-index: 1;
+        }
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        .page-header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 16px;
+            font-family: var(--font-heading);
+        }
+        .page-header p {
+            color: var(--slate-200);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Floating background icons */
+        .bg-symbol {
+            position: absolute;
+            color: var(--navy);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 1200px) {
+            .bg-symbol {
+                display: none;
+            }
+        }
+
+        /* Guide Layout */
+        .guide-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .guide-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 40px;
+        }
+        .guide-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 24px;
+            box-shadow: var(--sh-sm);
+            position: sticky;
+            top: 110px;
+            height: fit-content;
+        }
+        .guide-menu-btn {
+            padding: 14px 18px;
+            border-radius: var(--r-md);
+            border: 1px solid transparent;
+            background: transparent;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--slate-600);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .guide-menu-btn:hover {
+            background-color: var(--slate-50);
+            color: var(--navy);
+        }
+        .guide-menu-btn.active {
+            background-color: var(--navy);
+            color: var(--white);
+            border-color: var(--navy);
+            box-shadow: var(--sh-sm);
+        }
+        .guide-menu-btn.active i, .guide-menu-btn.active svg {
+            color: var(--champagne);
+        }
+        .guide-menu-btn i, .guide-menu-btn svg {
+            color: var(--slate-blue);
+            transition: var(--transition);
+        }
+        .guide-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .guide-panel {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 48px;
+            box-shadow: var(--sh-sm);
+            display: none;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .guide-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--champagne);
+        }
+        .guide-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FAQ Styling */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .faq-item {
+            border: 1px solid var(--slate-200);
+            border-radius: var(--r-md);
+            background-color: var(--white);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            border-color: var(--slate-blue);
+            box-shadow: var(--sh-sm);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1.05rem;
+            color: var(--navy);
+            font-family: var(--font-heading);
+            background-color: var(--white);
+            user-select: none;
+            transition: var(--transition);
+        }
+        .faq-question:hover {
+            color: var(--slate-blue);
+        }
+        .faq-answer {
+            padding: 0 24px 20px 24px;
+            color: var(--slate-600);
+            font-size: 0.95rem;
+            display: none;
+            line-height: 1.7;
+            border-top: 1px solid transparent;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+            border-top: 1px solid var(--slate-100);
+            animation: slideDown 0.3s ease;
+        }
+        .faq-item.active .faq-question {
+            background-color: var(--slate-50);
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 992px) {
+            .guide-container {
+                grid-template-columns: 1fr;
+            }
+            .guide-menu {
+                position: relative;
+                top: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 16px;
+            }
+            .guide-menu-btn {
+                flex: 1 1 calc(50% - 8px);
+                justify-content: center;
+            }
+        }
+        @media (max-width: 576px) {
+            .guide-menu-btn {
+                flex: 1 1 100%;
+            }
+            .guide-panel {
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body style="position: relative; overflow-x: hidden;">
+
+    <!-- Background Medical Symbols (Watermarks) -->
+    <div class="bg-symbol" style="left: 3%; top: 400px; transform: rotate(-15deg);"><i data-lucide="stethoscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 3%; top: 600px; transform: rotate(15deg);"><i data-lucide="heart-pulse" style="width: 140px; height: 140px;"></i></div>
+    <div class="bg-symbol" style="left: 2%; top: 1000px; transform: rotate(45deg);"><i data-lucide="dna" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 2.5%; top: 1350px; transform: rotate(-25deg);"><i data-lucide="pill" style="width: 110px; height: 110px;"></i></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html" style="color: var(--slate-blue); border-bottom: 2px solid var(--champagne); padding-bottom: 4px;">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Hasta & Ziyaretçi Rehberi</h1>
+            <p>Hastanemizde tedavi gören hastalarımız ve onları ziyaret etmek isteyen misafirlerimiz için faydalı bilgiler, kurallar ve yönergeler.</p>
+        </div>
+    </section>
+
+    <!-- Guide Content Section -->
+    <section class="container guide-section">
+        <div class="guide-container">
+            
+            <!-- Side Navigation Menu -->
+            <div class="guide-menu">
+                <button class="guide-menu-btn active" data-tab="ziyaret-kurallari">
+                    <i data-lucide="users-round"></i>
+                    <span>Ziyaretçi Kuralları</span>
+                </button>
+                <button class="guide-menu-btn" data-tab="refakatci-politikasi">
+                    <i data-lucide="heart-handshake"></i>
+                    <span>Refakatçi Politikası</span>
+                </button>
+                <button class="guide-menu-btn" data-tab="hasta-haklari">
+                    <i data-lucide="scale"></i>
+                    <span>Hasta Hakları</span>
+                </button>
+                <button class="guide-menu-btn" data-tab="faq">
+                    <i data-lucide="help-circle"></i>
+                    <span>Sıkça Sorulan Sorular</span>
+                </button>
+            </div>
+
+            <!-- Panels Section -->
+            <div class="guide-content">
+                
+                <!-- Panel 1: Ziyaretçi Kuralları -->
+                <div class="guide-panel active" id="panel-ziyaret-kurallari">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--navy);">Ziyaretçi Kuralları ve Saatleri</h2>
+                    <p style="color: var(--slate-600); margin-bottom: 30px; font-size: 1.05rem;">Hastalarımızın huzuru, sağlığı ve hijyenik bir tedavi ortamı sürdürebilmemiz amacıyla aşağıdaki kurallara uyulması zorunludur:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 36px;">
+                        <div style="background-color: var(--slate-50); border-radius: var(--r-md); padding: 24px; border: 1px solid var(--slate-200); transition: var(--transition);">
+                            <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--navy); display: flex; align-items: center; gap: 10px;">
+                                <i data-lucide="clock" style="width: 22px; height: 22px; color: var(--slate-blue);"></i>
+                                <span>Ziyaret Saatleri</span>
+                            </h3>
+                            <p style="font-size: 0.95rem; color: var(--slate-600); line-height: 1.6;">Ziyaret saatlerimiz her gün <b>10:00 - 22:00</b> arasındadır. Yoğun bakım üniteleri için özel ziyaret saatleri hekim kontrolündedir.</p>
+                        </div>
+                        <div style="background-color: var(--slate-50); border-radius: var(--r-md); padding: 24px; border: 1px solid var(--slate-200); transition: var(--transition);">
+                            <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--navy); display: flex; align-items: center; gap: 10px;">
+                                <i data-lucide="shield-alert" style="width: 22px; height: 22px; color: var(--slate-blue);"></i>
+                                <span>Hijyen & Sağlık</span>
+                            </h3>
+                            <p style="font-size: 0.95rem; color: var(--slate-600); line-height: 1.6;">Bulaşıcı hastalık belirtisi olanların (grip, öksürük vb.) ziyarete gelmemesi rica olunur. Girişte el dezenfektanı kullanılmalıdır.</p>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.4rem; margin-bottom: 20px; color: var(--navy); font-family: var(--font-heading);">Önemli Hususlar</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; color: var(--slate-600);">
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(22, 163, 74, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="check" style="color: #16a34a; width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Hastanın sağlığı açısından aynı anda en fazla 2 ziyaretçinin oda içerisinde bulunmasına izin verilir.</span>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(22, 163, 74, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="check" style="color: #16a34a; width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">12 yaşından küçük çocukların, bağışıklık sistemlerinin hassas olması nedeniyle hekim izni olmaksızın klinik katlarına getirilmemesi rica olunur.</span>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(220, 38, 38, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="x" style="color: #dc2626; width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Hasta odalarına canlı çiçek kabul edilmemektedir. Canlı çiçekler enfeksiyon riski barındırmaktadır. Gelen çiçekler danışmada kaydedilerek hasta taburcu edilirken teslim edilir.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Panel 2: Refakatçi Politikası -->
+                <div class="guide-panel" id="panel-refakatci-politikasi">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--navy);">Refakatçi Politikası</h2>
+                    <p style="color: var(--slate-600); margin-bottom: 30px; font-size: 1.05rem;">Hastalarımızın tedavi sürecinde yanlarında kalacak olan refakatçilerin rahatı ve hastane düzeni için hazırlanan yönergeler:</p>
+                    
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 18px; color: var(--slate-600); margin-bottom: 32px;">
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(29, 78, 137, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="info" style="color: var(--slate-blue); width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Her hasta için sadece 1 adet refakatçi kartı verilir ve odada en fazla 1 kişi kalabilir.</span>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(29, 78, 137, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="info" style="color: var(--slate-blue); width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Refakatçilerin yemek hizmetleri hastanemiz tarafından oda servisi olarak karşılanmaktadır (Sabah, öğle ve akşam yemekleri fiyata dahildir).</span>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(29, 78, 137, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="info" style="color: var(--slate-blue); width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Odalarda refakatçilerimiz için açılabilir konforlu yataklı koltuklar bulunmaktadır.</span>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <span style="background-color: rgba(202, 138, 4, 0.1); padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="alert-triangle" style="color: #ca8a04; width: 16px; height: 16px;"></i>
+                            </span>
+                            <span style="font-size: 1rem; line-height: 1.5; margin-top: 4px;">Refakatçilerin, hekimlerin vizite saatleri (sabah 09:00 - 10:30) esnasında bilgilendirme için oda içinde hazır bulunması önerilir.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Panel 3: Hasta Hakları -->
+                <div class="guide-panel" id="panel-hasta-haklari">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--navy);">Hasta Hakları ve Sorumlulukları</h2>
+                    <p style="color: var(--slate-600); margin-bottom: 30px; font-size: 1.05rem;">İbni Sina Hastanesi olarak Sağlık Bakanlığı Hasta Hakları Yönetmeliği doğrultusunda tüm hastalarımızın haklarını korumayı taahhüt ediyoruz.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                        <div style="border-left: 4px solid var(--slate-blue); padding-left: 20px; transition: var(--transition);">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 6px; color: var(--navy); font-family: var(--font-heading);">Saygınlık Görme Hakkı</h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6;">Her hastamız, güler yüzlü, saygılı ve şefkatli bir ortamda tıbbi bakım alma hakkına sahiptir.</p>
+                        </div>
+                        <div style="border-left: 4px solid var(--slate-blue); padding-left: 20px; transition: var(--transition);">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 6px; color: var(--navy); font-family: var(--font-heading);">Gizlilik ve Mahremiyet</h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6;">Tüm teşhis, tedavi ve özel hayat verileri kesinlikle gizli tutulur. Hastanın rızası olmadan üçüncü şahıslarla paylaşılamaz.</p>
+                        </div>
+                        <div style="border-left: 4px solid var(--slate-blue); padding-left: 20px; transition: var(--transition);">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 6px; color: var(--navy); font-family: var(--font-heading);">Bilgi İsteme ve Onay</h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6;">Hastalarımız tıbbi durumları, riskleri ve tedavi seçenekleri hakkında hekimlerinden ayrıntılı bilgi talep etme ve tedaviyi reddetme hakkına sahiptir.</p>
+                        </div>
+                        <div style="border-left: 4px solid var(--slate-blue); padding-left: 20px; transition: var(--transition);">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 6px; color: var(--navy); font-family: var(--font-heading);">Öneri ve Åikayet İletme</h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6;">Tüm geri bildirimleriniz Hasta Hakları Birimimizce incelenir ve en geç 3 iş günü içinde tarafınıza bilgi verilir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 4: FAQ (Sıkça Sorulan Sorular) -->
+                <div class="guide-panel" id="panel-faq">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--navy);">Sıkça Sorulan Sorular (S.S.S)</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                        
+                        <div style="border: 1px solid var(--slate-200); border-radius: var(--r-md); padding: 24px; background-color: var(--slate-50);">
+                            <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; font-family: var(--font-heading); display: flex; gap: 10px; align-items: flex-start;">
+                                <i data-lucide="help-circle" style="color: var(--slate-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                                <span>Randevuma gitmeden önce yapmam gereken hazırlıklar var mı?</span>
+                            </h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6; padding-left: 30px;">
+                                Randevunuza gelirken daha önce yapılmış tahlil, tetkik ve röntgen sonuçlarınızı, kullandığınız ilaç listelerini yanınızda getirmeniz teşhis sürecini hızlandıracaktır. Kan tahlili yaptıracaksanız en az 10-12 saatlik açlık ile gelmeniz önerilir.
+                            </p>
+                        </div>
+
+                        <div style="border: 1px solid var(--slate-200); border-radius: var(--r-md); padding: 24px; background-color: var(--slate-50);">
+                            <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; font-family: var(--font-heading); display: flex; gap: 10px; align-items: flex-start;">
+                                <i data-lucide="help-circle" style="color: var(--slate-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                                <span>Laboratuvar ve tahlil sonuçlarımı online olarak nasıl görebilirim?</span>
+                            </h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6; padding-left: 30px;">
+                                Tahlil sonuçlarınızı resmi e-Nabız sisteminden veya hastanemiz mobil uygulamasına T.C. Kimlik numaranızla giriş yaparak anında görüntüleyebilir ve PDF olarak indirebilirsiniz.
+                            </p>
+                        </div>
+
+                        <div style="border: 1px solid var(--slate-200); border-radius: var(--r-md); padding: 24px; background-color: var(--slate-50);">
+                            <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; font-family: var(--font-heading); display: flex; gap: 10px; align-items: flex-start;">
+                                <i data-lucide="help-circle" style="color: var(--slate-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                                <span>Anlaşmalı özel sağlık sigortaları ve SGK kapsamı nedir?</span>
+                            </h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6; padding-left: 30px;">
+                                Hastanemizin SGK (SSK, Emekli Sandığı, Bağkur) anlaşması tüm branşlarda geçerlidir. Ayrıca Türkiye'nin önde gelen 20'den fazla özel sağlık sigortası ve tamamlayıcı sağlık sigortası şirketi ile anlaşmamız bulunmaktadır. Ayrıntılı liste için iletişim sayfamızı inceleyebilirsiniz.
+                            </p>
+                        </div>
+
+                        <div style="border: 1px solid var(--slate-200); border-radius: var(--r-md); padding: 24px; background-color: var(--slate-50);">
+                            <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; font-family: var(--font-heading); display: flex; gap: 10px; align-items: flex-start;">
+                                <i data-lucide="help-circle" style="color: var(--slate-blue); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                                <span>Otopark ve vale hizmeti bulunuyor mu? Ücretli mi?</span>
+                            </h4>
+                            <p style="color: var(--slate-600); font-size: 0.98rem; line-height: 1.6; padding-left: 30px;">
+                                Hastanemizde 300 araç kapasiteli kapalı otopark mevcuttur. Hasta ve hasta yakınlarımız için otoparkımız ve profesyonel vale hizmetimiz tamamen ücretsizdir.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding text-center" style="background-color: var(--navy); color: white;">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 16px; font-size: 2.2rem; font-family: var(--font-heading);">Başka Bir Sorunuz mu Var?</h2>
+            <p style="color: var(--slate-200); max-width: 600px; margin: 0 auto 32px; font-size: 1.1rem;">Aradığınız bilgiyi rehberimizde bulamadıysanız, bizimle doğrudan iletişime geçebilirsiniz. Müşteri temsilcilerimiz size yardımcı olmaktan mutluluk duyacaktır.</p>
+            <a href="iletisim.html" class="btn-primary" style="padding: 14px 32px;">İletişim Sayfasına Git <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 40px; margin-bottom: 24px; filter: brightness(0) invert(1);">
+                    <p>İbni Sina Hastanesi, modern tıp teknolojileri ve uzman hekim kadrosuyla uluslararası standartlarda hizmet vermektedir.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hızlı Bağlantılar</h4>
+                    <ul class="footer-links">
+                        <li><a href="kurumsal.html">Hakkımızda</a></li>
+                        <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                        <li><a href="doktorlar.html">Doktorlarımız</a></li>
+                        <li><a href="iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hasta Rehberi</h4>
+                    <ul class="footer-links">
+                        <li><a href="hasta-rehberi.html">Ziyaret Saatleri</a></li>
+                        <li><a href="hasta-rehberi.html">Refakatçi Kuralları</a></li>
+                        <li><a href="hasta-rehberi.html">Hasta Hakları</a></li>
+                        <li><a href="hasta-rehberi.html">Anlaşmalı Kurumlar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="map-pin" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> Osmaniye, Türkiye</li>
+                        <li><i data-lucide="phone" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> 0328 813 50 10</li>
+                        <li><i data-lucide="mail" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> info@ibnisinahastanesi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 İbni Sina Hastanesi. Tüm Hakları Saklıdır.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook" style="width: 20px;"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram" style="width: 20px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        const tabBtns = document.querySelectorAll('.guide-menu-btn');
+        const panels = document.querySelectorAll('.guide-panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+
+                btn.classList.add('active');
+                const targetTab = btn.getAttribute('data-tab');
+                document.getElementById(`panel-${targetTab}`).classList.add('active');
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

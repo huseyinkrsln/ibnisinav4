@@ -1,0 +1,675 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurumsal Kimliğimiz | İbni Sina Hastanesi</title>
+    <meta name="description" content="İbni Sina Hastanesi Kurumsal Kimliği, Vizyon, Misyon, Kalite Politikamız ve Rakamlarla Hastanemiz.">
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .page-header {
+            position: relative;
+            background-image: url('img/ibni_sina_header_bg.png');
+            background-size: cover;
+            background-position: center;
+            padding: 110px 0;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 4px solid var(--champagne);
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(9, 32, 63, 0.75); /* Dark Navy Mask */
+            z-index: 1;
+        }
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        .page-header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 16px;
+            font-family: var(--font-heading);
+        }
+        .page-header p {
+            color: var(--slate-200);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Floating background symbols */
+        .bg-symbol {
+            position: absolute;
+            color: var(--navy);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 1200px) {
+            .bg-symbol {
+                display: none;
+            }
+        }
+
+        /* About Section Styles */
+        .about-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 24px;
+            color: var(--navy);
+        }
+        .about-text p {
+            color: var(--slate-600);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        /* Premium Bento Style Stats Grid */
+        .stats-section {
+            padding: 80px 0;
+            background-color: var(--slate-100);
+            position: relative;
+            z-index: 10;
+        }
+        .stats-container-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .stats-card-premium {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: var(--sh-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .stats-card-premium::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--slate-blue), var(--champagne));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .stats-card-premium:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sh-md);
+            border-color: var(--slate-blue);
+        }
+        .stats-card-premium:hover::after {
+            opacity: 1;
+        }
+        .stats-card-premium h3 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--slate-blue);
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+        }
+        .stats-card-premium p {
+            color: var(--slate-600);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Misyon & Vizyon Section */
+        .mv-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .mv-card {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 48px;
+            position: relative;
+            box-shadow: var(--sh-sm);
+            transition: var(--transition);
+        }
+        .mv-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sh-md);
+            border-color: var(--slate-blue);
+        }
+        .mv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--champagne);
+        }
+        .mv-card-dark {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            border: none;
+        }
+        .mv-card-dark::before {
+            background-color: var(--champagne);
+        }
+        .mv-card.mv-card-dark h2 {
+            color: var(--white);
+        }
+        .mv-card.mv-card-dark p {
+            color: var(--slate-200);
+        }
+        .mv-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--navy);
+        }
+        .mv-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Quality Policy Section */
+        .quality-section {
+            padding: 80px 0;
+            background-color: var(--slate-50);
+            position: relative;
+            z-index: 10;
+        }
+        .quality-card-premium {
+            background: linear-gradient(135deg, var(--navy-light) 0%, var(--slate-blue) 100%);
+            border-radius: var(--r-md);
+            padding: 60px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--sh-lg);
+            border-bottom: 4px solid var(--champagne);
+        }
+        .quality-card-premium::before {
+            content: '';
+            position: absolute;
+            right: -50px;
+            bottom: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .quality-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+        .quality-content h2 {
+            color: var(--white);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        .quality-content p {
+            color: var(--slate-200);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        .quality-list-premium {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quality-list-premium li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1.1rem;
+            color: var(--white);
+        }
+        .quality-list-premium li svg, .quality-list-premium li i {
+            color: var(--champagne);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .values-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .value-card-premium {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--sh-sm);
+            transition: var(--transition);
+        }
+        .value-card-premium:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sh-md);
+            border-color: var(--champagne);
+        }
+        .value-icon-box {
+            width: 72px;
+            height: 72px;
+            background-color: var(--slate-100);
+            color: var(--slate-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 1px solid var(--slate-200);
+            transition: var(--transition);
+        }
+        .value-card-premium:hover .value-icon-box {
+            background-color: var(--navy);
+            color: var(--champagne);
+            border-color: var(--navy);
+            transform: scale(1.1);
+        }
+        .value-card-premium h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-family: var(--font-heading);
+        }
+        .value-card-premium p {
+            color: var(--slate-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* History Section */
+        .history-section {
+            position: relative;
+            padding: 100px 0;
+            background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-top: 4px solid var(--champagne);
+        }
+        .history-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(9, 32, 63, 0.92) 0%, rgba(9, 32, 63, 0.7) 100%);
+            z-index: 1;
+        }
+        .history-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 992px) {
+            .about-grid, .mv-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-container-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quality-list-premium {
+                grid-template-columns: 1fr;
+            }
+            .values-grid-premium {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 576px) {
+            .stats-container-grid, .values-grid-premium {
+                grid-template-columns: 1fr;
+            }
+            .quality-card-premium {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body style="position: relative; overflow-x: hidden;">
+
+    <!-- Background Medical Symbols (Watermarks) -->
+    <div class="bg-symbol" style="left: 3%; top: 380px; transform: rotate(-15deg);"><i data-lucide="stethoscope" style="width: 120px; height: 120px;"></i></div>
+    <div class="bg-symbol" style="right: 3%; top: 480px; transform: rotate(15deg);"><i data-lucide="heart-pulse" style="width: 140px; height: 140px;"></i></div>
+    <div class="bg-symbol" style="right: 3.5%; top: 720px; transform: rotate(-15deg);"><i data-lucide="microscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="left: 2%; top: 880px; transform: rotate(45deg);"><i data-lucide="dna" style="width: 130px; height: 130px;"></i></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne); font-weight: bold;"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Kurumsal Kimliğimiz</h1>
+            <p>Sağlıkta güven, saygınlık ve uluslararası kalite standartları.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span style="font-weight: 700; color: var(--champagne); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; display: block; margin-bottom: 12px;">BİZ KİMİZ?</span>
+                    <h2>Åifa Dağıtan Bir Mirasın Modern Temsilcisi</h2>
+                    <p>Özel hastanecilik kavramının yaygınlaşmasının çok eski olmadığı ülkemizde 2002 yılında <strong>"sağlıkta güvence"</strong> sloganıyla çıktığımız yolda, değerli halkımızın bize duyduğu güven ve sektörde öncü kuruluş olmanın verdiği sorumlulukla emin adımlarla ilerliyoruz.</p>
+                    <p>Hizmete başladığımız günden bu yana gerek doktorlarımız ve yöneticilerimiz, gerekse yardımcı sağlık ve idari personelimiz ile birlikte hizmette öncü kuruluş olmak, koşulsuz hasta memnuniyeti sağlayabilmek, etik ilkelerden taviz vermeden en kaliteli sağlık hizmetini sunmak için gayretle çalışıyoruz.</p>
+                    <p>Halkımızın her türlü sağlık ihtiyacına cevap verebilmek için gelişen tıp teknolojilerini yakından takip ediyor, her geçen gün tıbbi donanımımızı biraz daha genişletiyoruz. Başlangıçta tek bir binadan müteşekkil hastanemizi 2005 yılında poliklinikler için yapılan ek binamızla genişleterek, hastalarımızın daha rahat bir ortamda muayene ve tedavi olabilmelerine olanak sağlayacak şekilde dizayn ettik.</p>
+                </div>
+                <div style="position: relative;">
+                    <div style="border-radius: var(--r-md); overflow: hidden; height: 420px; box-shadow: var(--sh-lg); border: 1.5px solid var(--slate-200);">
+                        <img src="img/ibni_sina_interior.png" alt="Modern Hastane İç Görünümü" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(9,32,63,0.85), transparent); padding: 32px; color: white;">
+                            <h4 style="color: white; font-size: 1.3rem; margin-bottom: 6px; font-family: var(--font-heading);">Sağlıkta Güvence</h4>
+                            <p style="color: var(--slate-200); font-size: 0.9rem; margin: 0; line-height: 1.4;">20 yılı aşkın süredir Osmaniye halkının hizmetindeyiz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 48px;">
+                <h2 style="font-size: 2.2rem; color: var(--navy); margin-bottom: 12px; font-family: var(--font-heading);">Rakamlarla İbni Sina Hastanesi</h2>
+                <p style="color: var(--slate-600); max-width: 650px; margin: 0 auto; font-size: 1.05rem;">Modern altyapımız, geniş hizmet alanımız ve uzman kadromuzla Osmaniye'nin hizmetindeyiz.</p>
+            </div>
+            
+            <div class="stats-container-grid">
+                <div class="stats-card-premium">
+                    <h3>4296mÂ²</h3>
+                    <p>Kapalı Hizmet Alanı</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>74 Yatak</h3>
+                    <p>Hasta Yatak Kapasitesi</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>19 Küvöz</h3>
+                    <p>3. Basamak Yenidoğan Yoğun Bakım</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>200+</h3>
+                    <p>Sağlık ve İdari Personel</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>3 Adet</h3>
+                    <p>Modern Ameliyathane</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>20 Adet</h3>
+                    <p>Branş Polikliniği</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>28 Hekim</h3>
+                    <p>Uzman & Pratisyen Kadro</p>
+                </div>
+                <div class="stats-card-premium">
+                    <h3>24/7</h3>
+                    <p>Kesintisiz Acil Servis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mv-section">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h2><i data-lucide="target" style="width: 32px; height: 32px; color: var(--slate-blue);"></i> Misyonumuz</h2>
+                    <p>Bireylerin yaşam kalitesini artırmak için tıp bilimindeki güncel gelişmeleri takip ederek, yüksek standartlı sağlık hizmetlerini toplumun her kesimine etik, güvenilir ve sürdürülebilir bir modelle sunmaktır. Hasta haklarına saygılı ve insan odaklı bir yaklaşımla tıp etiğine tam bağlıyız.</p>
+                </div>
+                <div class="mv-card mv-card-dark">
+                    <h2><i data-lucide="eye" style="width: 32px; height: 32px; color: var(--champagne);"></i> Vizyonumuz</h2>
+                    <p>Teknolojik altyapısı ve uzman akademik kadrosuyla uluslararası platformda tanınan, sağlık turizminde öncü ve Türkiye'nin en güvenilen sağlık kurumu olma vizyonunu taşıyoruz. İnsan hayatına değer katan premium bir sağlık merkezi olarak geleceğe yön veriyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Policy Section -->
+    <section class="quality-section">
+        <div class="container">
+            <div class="quality-card-premium">
+                <div class="quality-content">
+                    <span style="font-weight: 700; color: var(--champagne); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; display: block; margin-bottom: 12px;">KALİTE VE GÜVEN</span>
+                    <h2>Kalite Politikamız</h2>
+                    <p>Hastanemiz, ulusal ve uluslararası kalite standartlarını (SKS, ISO) temel alarak, hata payını minimize eden, sürekli iyileşmeyi hedefleyen ve hasta güvenliğini tüm süreçlerin merkezine koyan bir yönetim anlayışını benimser.</p>
+                    
+                    <ul class="quality-list-premium">
+                        <li>
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            <span>Sürekli Eğitilen Profesyonel Kadro</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            <span>Sıfır Atık ve Çevre Dostu Yaklaşım</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            <span>Hasta Hakları ve Mahremiyeti</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            <span>Klinik Yönetişim ve Veriye Dayalı Kararlar</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <span style="font-weight: 700; color: var(--slate-blue); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; display: block; margin-bottom: 12px;">DEÄERLERİMİZ</span>
+                <h2 style="font-family: var(--font-heading); color: var(--navy); font-size: 2.2rem;">Bizi Biz Yapan Değerlerimiz</h2>
+                <p style="color: var(--slate-600); margin-top: 12px; font-size: 1rem;">Tedavi ettiğimiz her cana saygı duyuyor ve işimizi en yüksek ahlaki değerlerle yapıyoruz.</p>
+            </div>
+
+            <div class="values-grid-premium">
+                <!-- Value 1 -->
+                <div class="value-card-premium">
+                    <div class="value-icon-box"><i data-lucide="users" style="width: 28px; height: 28px;"></i></div>
+                    <h3>İnsan Odaklılık</h3>
+                    <p>Her adımda hastalarımızın ve çalışanlarımızın sağlığını önceliyoruz.</p>
+                </div>
+                <!-- Value 2 -->
+                <div class="value-card-premium">
+                    <div class="value-icon-box"><i data-lucide="microscope" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Hassasiyet</h3>
+                    <p>Teşhis ve tedavide klinik mükemmellik için milimetrik hassasiyet.</p>
+                </div>
+                <!-- Value 3 -->
+                <div class="value-card-premium">
+                    <div class="value-icon-box"><i data-lucide="trending-up" style="width: 28px; height: 28px;"></i></div>
+                    <h3>İnovasyon</h3>
+                    <p>Sağlıkta en son teknolojileri sistemimize entegre ediyoruz.</p>
+                </div>
+                <!-- Value 4 -->
+                <div class="value-card-premium">
+                    <div class="value-icon-box"><i data-lucide="shield-check" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Güven</h3>
+                    <p>Åeffaf iletişim ve dürüstlükle hastalarımızın güvenini kazanıyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ibn Sina Corporate Bio Section -->
+    <section class="history-section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: center; gap: 48px;">
+                <div style="border-left: 4px solid var(--champagne); padding-left: 32px;">
+                    <span style="font-weight: 700; color: var(--champagne); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; display: block; margin-bottom: 12px;">TARİHSEL KÖKLERİMİZ</span>
+                    <h2 style="color: var(--white); font-size: 2.2rem; margin-bottom: 20px; font-family: var(--font-heading);">Asırları Aşan Tıp Vizyonu</h2>
+                    <p style="color: var(--slate-200); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px;">Osmaniye Özel İbni Sina Hastanesi olarak, ismimizi taşımaktan onur duyduğumuz büyük hekim ve filozof İbni Sina'nın tıbbi ahlakını ve bilimselliğini benimsiyoruz.</p>
+                    <p style="color: var(--slate-200); font-size: 1.05rem; line-height: 1.8; margin: 0;">Onun asırlar boyu Avrupa üniversitelerinde başucu kitabı olan "El-Kanun fi't-Tıbb" (Tıbbın Kanunu) eserindeki insan odaklı, araştırmacı ve şefkatli hekimlik ruhunu, bugün modern tıp teknolojileriyle harmanlayarak Osmaniye halkına sunuyoruz.</p>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <img src="img/ibni_sina_history.png" alt="İbni Sina Tıbbi Vizyon" style="width: 100%; max-width: 480px; height: 320px; object-fit: cover; border-radius: var(--r-md); border: 2.5px solid var(--champagne); box-shadow: var(--sh-lg);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 40px; margin-bottom: 24px; filter: brightness(0) invert(1);">
+                    <p>İbni Sina Hastanesi, modern tıp teknolojileri ve uzman hekim kadrosuyla uluslararası standartlarda hizmet vermektedir.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hızlı Bağlantılar</h4>
+                    <ul class="footer-links">
+                        <li><a href="kurumsal.html">Hakkımızda</a></li>
+                        <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                        <li><a href="doktorlar.html">Doktorlarımız</a></li>
+                        <li><a href="iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hasta Rehberi</h4>
+                    <ul class="footer-links">
+                        <li><a href="hasta-rehberi.html">Ziyaret Saatleri</a></li>
+                        <li><a href="hasta-rehberi.html">Refakatçi Kuralları</a></li>
+                        <li><a href="hasta-rehberi.html">Hasta Hakları</a></li>
+                        <li><a href="hasta-rehberi.html">Anlaşmalı Kurumlar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="map-pin" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> Osmaniye, Türkiye</li>
+                        <li><i data-lucide="phone" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> 0328 813 50 10</li>
+                        <li><i data-lucide="mail" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> info@ibnisinahastanesi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 İbni Sina Hastanesi. Tüm Hakları Saklıdır.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook" style="width: 20px;"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram" style="width: 20px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

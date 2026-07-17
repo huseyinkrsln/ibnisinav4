@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İş Başvurusu &amp; Kariyer - İbni Sina Hastanesi</title>
+    <meta name="description" content="Osmaniye İbni Sina Hastanesi kariyer fırsatları ve iş başvurusu. Sağlık ekibimize katılın.">
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <style>
+        /* ---- Hero ---- */
+        .career-hero {
+            position: relative;
+            min-height: 540px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(120deg, rgba(9,32,63,0.92) 0%, rgba(9,32,63,0.70) 60%, rgba(196,160,79,0.45) 100%),
+                        url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat;
+            overflow: hidden;
+        }
+        .career-hero-badge {
+            display: inline-block;
+            background: var(--champagne);
+            color: var(--navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 18px;
+            border-radius: 30px;
+            margin-bottom: 22px;
+        }
+        .career-hero h1 {
+            color: #fff;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.18;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+        .career-hero h1 span { color: var(--champagne); }
+        .career-hero p {
+            color: rgba(255,255,255,0.88);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 36px;
+        }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-hero-primary {
+            background: var(--champagne);
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 14px 30px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-hero-primary:hover { background: #b8983a; transform: translateY(-2px); }
+        .btn-hero-secondary {
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.55);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 12px 28px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-hero-secondary:hover { background: rgba(255,255,255,0.22); }
+
+        /* ---- Stats Banner ---- */
+        .stats-banner {
+            background: var(--navy);
+            padding: 44px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px 24px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-num {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--champagne);
+            line-height: 1;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+
+        /* ---- Policy ---- */
+        .policy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+        .policy-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .policy-img-circle {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid white;
+            box-shadow: var(--shadow-lg);
+        }
+        .policy-img-circle img { width: 100%; height: 100%; object-fit: cover; }
+        .policy-kv-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            box-shadow: var(--shadow-sm);
+            margin-top: 28px;
+        }
+        .policy-icon {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--primary-light); color: var(--primary);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        /* ---- Why Us ---- */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .why-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .why-card-icon {
+            width: 58px; height: 58px;
+            border-radius: var(--radius-md);
+            background: var(--primary-light); color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .why-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin: 0; }
+        .why-card p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+        .why-card-featured {
+            background: var(--navy); color: white;
+            border: none;
+        }
+        .why-card-featured .why-card-icon { background: rgba(255,255,255,0.15); color: var(--champagne); }
+        .why-card-featured h3 { color: white; }
+        .why-card-featured p { color: rgba(255,255,255,0.82); }
+
+        /* ---- Positions ---- */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 40px;
+        }
+        .position-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .position-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .position-badge {
+            font-size: 0.75rem; font-weight: 800; padding: 5px 12px;
+            border-radius: 20px; display: inline-block; margin-bottom: 14px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .badge-medical { background: var(--primary-light); color: var(--primary); }
+        .badge-admin   { background: #e0f7fa; color: #0277bd; }
+        .badge-support { background: #f1f5f9; color: #475569; }
+        .badge-tech    { background: #fef3c7; color: #92400e; }
+        .position-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+        .position-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 22px; }
+        .btn-apply {
+            display: block; text-align: center; padding: 12px;
+            background: transparent; border: 2px solid var(--primary); color: var(--primary);
+            border-radius: var(--radius-sm); font-weight: 700; font-size: 0.95rem;
+            text-decoration: none; transition: var(--transition);
+        }
+        .btn-apply:hover { background: var(--primary); color: white; }
+
+        /* ---- Application Form ---- */
+        .form-wrap {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        .form-header {
+            background: var(--navy); color: white;
+            padding: 26px 36px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .form-header h3 { color: white; font-size: 1.3rem; margin: 0; }
+        .form-tag {
+            background: var(--champagne); color: var(--navy);
+            padding: 5px 14px; border-radius: 6px;
+            font-size: 0.78rem; font-weight: 800; letter-spacing: 0.5px;
+        }
+        .form-body { padding: 36px; display: flex; flex-direction: column; gap: 28px; }
+        .form-step-title {
+            display: flex; align-items: center; gap: 14px;
+            border-bottom: 2px solid var(--border); padding-bottom: 14px; margin-bottom: 22px;
+        }
+        .step-num {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1rem; flex-shrink: 0;
+        }
+        .form-step-title h3 { margin: 0; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--navy); }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-group { display: flex; flex-direction: column; gap: 7px; }
+        .form-group label { font-size: 0.82rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+        .form-input {
+            width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+            padding: 12px 16px; font-size: 0.97rem; font-family: var(--font-body);
+            outline: none; transition: var(--transition); background: white; color: var(--navy);
+        }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+        .radio-row {
+            display: flex; gap: 24px;
+            border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+            padding: 12px 16px; align-items: center;
+        }
+        .radio-row label { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+        .form-footer {
+            background: #f8fafc; padding: 28px 36px;
+            display: flex; flex-direction: column; gap: 18px;
+            border-top: 1px solid var(--border);
+        }
+        .kvkk-row { display: flex; gap: 12px; align-items: flex-start; }
+        .kvkk-row input[type=checkbox] { margin-top: 3px; cursor: pointer; width: 16px; height: 16px; }
+        .kvkk-row label { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+        .btn-submit {
+            background: var(--navy); color: white;
+            border: none; border-radius: var(--r-md);
+            padding: 16px; font-size: 1.05rem; font-weight: 800;
+            font-family: var(--font-body); cursor: pointer;
+            transition: var(--transition); display: flex; width: 100%;
+            align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-submit:hover { background: var(--slate-blue); transform: translateY(-2px); box-shadow: var(--sh-md); }
+
+        /* ---- Contact Strip ---- */
+        .contact-strip { background: var(--navy); padding: 54px 0; }
+        .contact-strip h2 { color: white; font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 36px; }
+        .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 720px; margin: 0 auto; }
+        .contact-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius-md); padding: 26px;
+            display: flex; gap: 18px; align-items: center;
+        }
+        .contact-card-icon { color: var(--champagne); flex-shrink: 0; }
+        .contact-card span { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; display: block; margin-bottom: 6px; }
+        .contact-card p { font-size: 1.12rem; font-weight: 700; color: white; margin: 0; }
+
+        /* ---- Process Steps ---- */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px; left: 10%; right: 10%;
+            height: 2px; background: var(--border);
+            z-index: 0;
+        }
+        .process-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+        .process-num {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: white; border: 3px solid var(--primary);
+            color: var(--primary); font-size: 1.5rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px; box-shadow: var(--shadow-sm);
+        }
+        .process-step h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .process-step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .policy-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr 1fr; }
+            .positions-grid { grid-template-columns: 1fr 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .process-steps::before { display: none; }
+            .contact-cards { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .positions-grid { grid-template-columns: 1fr; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+            .policy-images { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .career-tabs { flex-direction: column; }
+        }
+
+        /* Tab Styles */
+        .career-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 0 36px;
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+        }
+        .tab-btn {
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--slate-600);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab-btn:hover {
+            color: var(--navy);
+        }
+        .tab-btn.active {
+            color: var(--navy);
+            border-bottom-color: var(--navy);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Dynamic Form Field Styles */
+        .dynamic-row {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--slate-200);
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .dynamic-row .remove-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dynamic-row .remove-btn:hover {
+            background: #fecaca;
+        }
+        .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e0f2fe;
+            color: #0284c7;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 24px;
+        }
+        .add-btn:hover {
+            background: #bae6fd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="career-hero">
+        <div class="container">
+            <span class="career-hero-badge">İbni Sina Hastanesi Kariyer</span>
+            <h1>Kariyeriniz Bizimle <span>Åekillensin</span></h1>
+            <p>İbni Sina Hastanesi olarak modern tıp teknolojilerini insani değerlerle buluşturuyoruz. Ekibimize katılacak her profesyonelin kariyer yolculuğunu destekliyoruz.</p>
+            <div class="hero-cta">
+                <a href="#application-form" class="btn-hero-primary"><i data-lucide="send" style="width:18px;height:18px;"></i> Hemen Başvur</a>
+                <a href="#why-us" class="btn-hero-secondary"><i data-lucide="info" style="width:18px;height:18px;"></i> Neden Biz?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-num">25+</span>
+                    <span class="stat-label">Yıllık Deneyim</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">300+</span>
+                    <span class="stat-label">Uzman Çalışan</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">50+</span>
+                    <span class="stat-label">Tıbbi Birim</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">98%</span>
+                    <span class="stat-label">Çalışan Memnuniyeti</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recruitment Policy -->
+    <section class="section" style="background-color: var(--bg-main);">
+        <div class="container policy-grid">
+            <div>
+                <span style="font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; display: block; margin-bottom: 12px;">POLİTİKAMIZ</span>
+                <h2 style="font-size: 2.3rem; margin-bottom: 22px; text-align: left;">İşe Alım Politikamız</h2>
+                <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 16px;">
+                    Hastanemiz, Anayasa'nın 20. maddesine ve 6698 sayılı KVK Kanunu'nun ilgili maddelerine uygun olarak kişisel veri güvenliğini ön planda tutan şeffaf bir işe alım süreci yürütmektedir.
+                </p>
+                <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 28px;">
+                    İnsan kaynakları politikamızın temelini <strong>yetkinlik bazlı değerlendirme</strong>, <strong>sürekli gelişim</strong> ve <strong>çalışan memnuniyeti</strong> oluşturmaktadır. Her pozisyondaki adaylarımıza eşit ve adil bir değerlendirme sürecini taahhüt ediyoruz.
+                </p>
+                <div class="policy-kv-box">
+                    <div class="policy-icon">
+                        <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; margin-bottom: 6px; font-weight: 700; color: var(--navy);">KVKK Uyumlu İK Süreçleri</h4>
+                        <p style="color: var(--text-muted); font-size: 0.93rem; line-height: 1.6;">Tüm başvurularınız 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında güvence altındadır.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="policy-images">
+                <div class="policy-img-circle">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop" alt="Sağlık profesyoneli laboratuvarda">
+                </div>
+                <div class="policy-img-circle" style="margin-top: 40px;">
+                    <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=600&auto=format&fit=crop" alt="Hemşire hasta bakımı">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Başvuru Süreci -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Başvuru Süreci Nasıl İşler?</h2>
+                <p>4 adımda İbni Sina ailesine katılın.</p>
+            </div>
+            <div class="process-steps" style="margin-top: 48px;">
+                <div class="process-step">
+                    <div class="process-num">1</div>
+                    <h4>Formu Doldurun</h4>
+                    <p>Aşağıdaki başvuru formunu eksiksiz doldurun ve gönderin.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">2</div>
+                    <h4>Ön Değerlendirme</h4>
+                    <p>İK uzmanlarımız başvurunuzu 3â€“5 iş günü içinde inceler.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">3</div>
+                    <h4>Mülakat</h4>
+                    <p>Uygun bulunan adaylar telefon veya yüz yüze görüşmeye davet edilir.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">4</div>
+                    <h4>Teklif &amp; İşe Başlama</h4>
+                    <p>Başarılı adaylara iş teklifi sunulur ve işe başlama süreci başlatılır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section" id="why-us" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Neden İbni Sina Hastanesi?</h2>
+                <p>Osmaniye'nin en köklü sağlık kurumunda çalışmanın ayrıcalıklarını keşfedin.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card why-card-featured">
+                    <div class="why-card-icon"><i data-lucide="microscope" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Modern Tıp Teknolojisi</h3>
+                    <p>En güncel cihazlar ve dijital sağlık altyapısı ile çalışanlarımıza üst düzey bir çalışma ortamı sunuyoruz.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon"><i data-lucide="users" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Güçlü Ekip Ruhu</h3>
+                    <p>Alanında uzman hekimler ve deneyimli sağlık personeli ile birlikte büyüyen, bağlı bir aile ortamı.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon"><i data-lucide="graduation-cap" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Sürekli Eğitim</h3>
+                    <p>Seminerler, kongre katılımları ve sertifika programları ile kariyer yolculuğunuzu sürekli destekliyoruz.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon"><i data-lucide="trending-up" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Kariyer Olanakları</h3>
+                    <p>Performans bazlı terfi sistemi ve şeffaf değerlendirme süreçleriyle kariyer hedeflerinize ulaşın.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon"><i data-lucide="heart" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Sağlık &amp; Yan Haklar</h3>
+                    <p>Özel sağlık sigortası, yemek yardımı ve düzenli sağlık check-up hizmetleri tüm personelimize sunulmaktadır.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon"><i data-lucide="map-pin" style="width: 28px; height: 28px;"></i></div>
+                    <h3>Merkezi Konum</h3>
+                    <p>Osmaniye'nin kalbinde, toplu taşımaya yakın ve ulaşımı kolay çalışma ortamı.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section class="section" id="open-positions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Açık Pozisyonlar</h2>
+                <p>Hastanemiz bünyesindeki güncel iş fırsatlarını inceleyin.</p>
+            </div>
+            <div class="positions-grid">
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-medical">Medikal</span>
+                        <h3>Uzman Hemşire</h3>
+                        <p>Yataklı servislerde görevlendirilmek üzere en az 2 yıl deneyimli, hasta odaklı çalışma arkadaşları arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('Hemşire')">Başvur</a>
+                </div>
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-admin">İdari</span>
+                        <h3>Tıbbi Sekreter</h3>
+                        <p>Hasta karşılama ve kayıt süreçlerinde deneyimli, iletişim becerileri yüksek ekip arkadaşları arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('Tıbbi Sekreter')">Başvur</a>
+                </div>
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-tech">Teknik</span>
+                        <h3>Biyomedikal Tekniker</h3>
+                        <p>Tıbbi cihaz bakım ve onarım süreçlerinde görev alacak, tıbbi teknik bilgiye sahip personel arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('Teknik Servis')">Başvur</a>
+                </div>
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-medical">Medikal</span>
+                        <h3>ATT / Sağlık Memuru</h3>
+                        <p>Acil servis ve hasta transferi süreçlerinde görevlendirmek üzere sertifikalı acil tıp teknisyeni arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('ATT / Sağlık Memuru')">Başvur</a>
+                </div>
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-support">Destek</span>
+                        <h3>Temizlik Personeli</h3>
+                        <p>Hastane hijyen standartlarına hakim, titiz ve dinamik çalışma disiplinine sahip adaylar arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('Temizlik Personeli')">Başvur</a>
+                </div>
+                <div class="position-card">
+                    <div>
+                        <span class="position-badge badge-admin">Güvenlik</span>
+                        <h3>Güvenlik Görevlisi</h3>
+                        <p>Hastane güvenlik protokollerine uyumlu, dikkatli ve sorumluluk sahibi güvenlik personeli arıyoruz.</p>
+                    </div>
+                    <a href="#application-form" class="btn-apply" onclick="setPosition('Güvenlik')">Başvur</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 32px; color: var(--text-muted); font-style: italic; font-size: 0.97rem;">
+                Aradığınız pozisyonu bulamadınız mı? Genel başvuru formunu doldurup özgeçmişinizi bırakabilirsiniz.
+            </p>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="section" id="application-form" style="background: var(--bg-main);">
+        <div class="container" style="max-width: 820px;">
+            <div class="section-title">
+                <h2>Başvuru Formu</h2>
+                <p>Aşağıdaki alanları eksiksiz doldurunuz. Tüm bilgiler gizli tutulmaktadır.</p>
+            </div>
+
+            <div class="form-wrap">
+                <div class="form-header">
+                    <h3>İş Başvuru Formu</h3>
+                    <span class="form-tag">Hızlı Başvuru</span>
+                </div>
+                
+                <div class="career-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'tab-detayli')">Detaylı Başvuru Formu</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tab-hizli')">Hızlı CV Gönder</button>
+                </div>
+
+                <div id="tab-detayli" class="tab-content active">
+                    <form id="careerForm">
+                        <div class="form-body">
+                        <!-- Adım 1: Kişisel Bilgiler -->
+                        <div>
+                            <div class="form-step-title">
+                                <div class="step-num">1</div>
+                                <h3>Kişisel Bilgiler</h3>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>T.C. Kimlik No</label>
+                                    <input type="text" placeholder="00000000000" required class="form-input" maxlength="11" pattern="\d{11}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Adı ve Soyadı</label>
+                                    <input type="text" placeholder="Ad Soyad" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Doğum Tarihi</label>
+                                    <input type="date" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>GSM Numarası</label>
+                                    <input type="tel" placeholder="05XX XXX XX XX" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>E-Posta Adresi</label>
+                                    <input type="email" placeholder="ornek@mail.com" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Medeni Hali</label>
+                                    <select class="form-input">
+                                        <option value="">Seçiniz</option>
+                                        <option>Evli</option>
+                                        <option>Bekar</option>
+                                        <option>Boşanmış</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>Profil Fotoğrafı</label>
+                                    <input type="file" accept="image/*" class="form-input" style="padding: 9px 16px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Adım 2: Eğitim ve Uzmanlık -->
+                        <div>
+                            <div class="form-step-title">
+                                <div class="step-num">2</div>
+                                <h3>Eğitim ve Uzmanlık</h3>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Eğitim Düzeyi</label>
+                                    <select class="form-input" required>
+                                        <option value="">Seçiniz</option>
+                                        <option>Lise</option>
+                                        <option>Meslek Yüksek Okulu</option>
+                                        <option>Üniversite (Lisans)</option>
+                                        <option>Yüksek Lisans</option>
+                                        <option>Doktora</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bölüm / Branş</label>
+                                    <input type="text" placeholder="Mezuniyet Bölümü" class="form-input" required>
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>Başvurulan Pozisyon</label>
+                                    <select id="target-position" class="form-input" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Doktor">Doktor</option>
+                                        <option value="Hemşire">Hemşire</option>
+                                        <option value="Ebe">Ebe</option>
+                                        <option value="Tıbbi Sekreter">Tıbbi Sekreter</option>
+                                        <option value="Teknik Servis">Biyomedikal Tekniker</option>
+                                        <option value="ATT / Sağlık Memuru">ATT / Sağlık Memuru</option>
+                                        <option value="Temizlik Personeli">Temizlik Personeli</option>
+                                        <option value="Güvenlik">Güvenlik Görevlisi</option>
+                                        <option value="Diğer">Diğer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Adım 3: Sağlık ve Deneyim -->
+                        <div>
+                            <div class="form-step-title">
+                                <div class="step-num">3</div>
+                                <h3>Sağlık ve Deneyim</h3>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Kan Grubu</label>
+                                    <select class="form-input" required>
+                                        <option value="">Seçiniz</option>
+                                        <option>A Rh +</option><option>A Rh -</option>
+                                        <option>B Rh +</option><option>B Rh -</option>
+                                        <option>AB Rh +</option><option>AB Rh -</option>
+                                        <option>0 Rh +</option><option>0 Rh -</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sigara Kullanımı</label>
+                                    <div class="radio-row">
+                                        <label><input type="radio" name="smoke" value="Evet" required> Evet</label>
+                                        <label><input type="radio" name="smoke" value="Hayır"> Hayır</label>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>Gece Mesaisi Uygunluğu</label>
+                                    <div class="radio-row">
+                                        <label><input type="radio" name="night" value="Uygun" required> Gece nöbetinde çalışabilirim</label>
+                                        <label><input type="radio" name="night" value="Uygun Değil"> Gece nöbetinde çalışamam</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Adım 4: Deneyim ve Kurslar -->
+                        <div>
+                            <div class="form-step-title">
+                                <div class="step-num">4</div>
+                                <h3>Deneyim ve Kurslar</h3>
+                            </div>
+                            
+                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">İş Deneyimleri</h4>
+                            <div id="experience-container">
+                                <div class="dynamic-row">
+                                    <div class="form-grid-2">
+                                        <div class="form-group">
+                                            <label>İş Yerinin Adı</label>
+                                            <input type="text" name="exp_company[]" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>İş Yerindeki Göreviniz</label>
+                                            <input type="text" name="exp_role[]" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Çalışma Süreniz</label>
+                                            <input type="text" name="exp_duration[]" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>İş Yeri Hangi Şehirde</label>
+                                            <input type="text" name="exp_city[]" class="form-input">
+                                        </div>
+                                        <div class="form-group" style="grid-column: span 2;">
+                                            <label>Ayrılma Sebebiniz</label>
+                                            <input type="text" name="exp_reason[]" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="add-btn" onclick="addExperience()"><i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i> İş Deneyimi Ekle</button>
+
+                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; margin-top: 16px;">Kurs ve Sertifikalar</h4>
+                            <div id="course-container">
+                                <div class="dynamic-row">
+                                    <div class="form-grid-2">
+                                        <div class="form-group">
+                                            <label>Kurs Adı / Konusu</label>
+                                            <input type="text" name="course_name[]" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Eğitim Kurumu</label>
+                                            <input type="text" name="course_institution[]" class="form-input">
+                                        </div>
+                                        <div class="form-group" style="grid-column: span 2;">
+                                            <label>Kurs Süresi / Tarihi</label>
+                                            <input type="text" name="course_duration[]" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="add-btn" onclick="addCourse()"><i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i> Kurs Ekle</button>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="form-footer">
+                        <div class="kvkk-row">
+                            <input type="checkbox" required>
+                            <label>
+                                <strong>Beyan Ve Rıza Onay Formu</strong>'nu okudum, anladım ve onaylıyorum. Verilerimin 6698 sayılı KVKK kapsamında işlenmesine izin veriyorum.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            Başvuruyu Tamamla
+                        </button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="tab-hizli" class="tab-content">
+                <form id="quickCvForm">
+                    <div class="form-body">
+                        <div>
+                            <div class="form-step-title">
+                                <div class="step-num">1</div>
+                                <h3>Hızlı Özgeçmiş Gönderimi</h3>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label>Adı ve Soyadı</label>
+                                    <input type="text" placeholder="Ad Soyad" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefon No</label>
+                                    <input type="tel" placeholder="05XX XXX XX XX" required class="form-input">
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>CV Yükle (PDF, DOCX)</label>
+                                    <input type="file" accept=".pdf,.doc,.docx" required class="form-input" style="padding: 9px 16px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <div class="kvkk-row">
+                            <input type="checkbox" required>
+                            <label>
+                                <strong>Beyan Ve Rıza Onay Formu</strong>'nu okudum, anladım ve onaylıyorum. Verilerimin 6698 sayılı KVKK kapsamında işlenmesine izin veriyorum.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+                            CV'mi Gönder
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Strip -->
+    <div class="contact-strip">
+        <div class="container">
+            <h2>Sorularınız mı Var?</h2>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-card-icon"><i data-lucide="phone" style="width: 34px; height: 34px;"></i></div>
+                    <div>
+                        <span>İrtibat Telefonu</span>
+                        <p>0328 813 50 10</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-icon"><i data-lucide="mail" style="width: 34px; height: 34px;"></i></div>
+                    <div>
+                        <span>İK E-Posta</span>
+                        <p>ik@ibnisinahastanesi.com.tr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-container">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+                </a>
+                <p>Modern tıbbın tüm imkanlarını insan odaklı yaklaşımla birleştirerek güvenilir sağlık hizmeti sunuyoruz.</p>
+                <div class="social-links">
+                    <a href="#"><i data-lucide="facebook"></i></a>
+                    <a href="#"><i data-lucide="twitter"></i></a>
+                    <a href="#"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Kurumsal</h4>
+                <ul>
+                    <li><a href="kurumsal.html">Hakkımızda</a></li>
+                    <li><a href="kurumsal.html">Kalite Politikamız</a></li>
+                    <li><a href="is-basvurusu.html">İş Başvurusu</a></li>
+                    <li><a href="laboratuvar-sonuclari.html">Laboratuvar Sonuçları</a></li>
+                    <li><a href="radyolojik-goruntuleme.html">Radyolojik Görüntüleme</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Hızlı Bağlantılar</h4>
+                <ul>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                    <li><a href="hasta-rehberi.html">KVK Aydınlatma Metni</a></li>
+                    <li><a href="hasta-rehberi.html">Çerez Politikası</a></li>
+                    <li><a href="hasta-rehberi.html#faq">Sıkça Sorulan Sorular</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>İletişim Bilgileri</h4>
+                <ul>
+                    <li>
+                        <i data-lucide="map-pin"></i>
+                        <span>Merkez Mah. Sağlık Sok. No:12, Osmaniye</span>
+                    </li>
+                    <li>
+                        <i data-lucide="phone"></i>
+                        <span>0328 813 50 10</span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail"></i>
+                        <span>info@ibnisinahastanesi.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 İbni Sina Hastanesi. Tüm hakları saklıdır.</p>
+            <p>Design with health in mind</p>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        // Responsive Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if(nav.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        function setPosition(posName) {
+            const select = document.getElementById('target-position');
+            if(select) {
+                select.value = posName;
+                openTab({currentTarget: document.querySelector('.tab-btn')}, 'tab-detayli');
+            }
+        }
+
+        // Tab functionality
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+
+        // Dynamic Fields functionality
+        function addExperience() {
+            const container = document.getElementById('experience-container');
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()"><i data-lucide="trash-2" style="width: 16px; height: 16px;"></i></button>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>İş Yerinin Adı</label>
+                        <input type="text" name="exp_company[]" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>İş Yerindeki Göreviniz</label>
+                        <input type="text" name="exp_role[]" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Çalışma Süreniz</label>
+                        <input type="text" name="exp_duration[]" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>İş Yeri Hangi Şehirde</label>
+                        <input type="text" name="exp_city[]" class="form-input">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Ayrılma Sebebiniz</label>
+                        <input type="text" name="exp_reason[]" class="form-input">
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+            lucide.createIcons();
+        }
+
+        function addCourse() {
+            const container = document.getElementById('course-container');
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()"><i data-lucide="trash-2" style="width: 16px; height: 16px;"></i></button>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>Kurs Adı / Konusu</label>
+                        <input type="text" name="course_name[]" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Eğitim Kurumu</label>
+                        <input type="text" name="course_institution[]" class="form-input">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Kurs Süresi / Tarihi</label>
+                        <input type="text" name="course_duration[]" class="form-input">
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+            lucide.createIcons();
+        }
+
+        const careerForm = document.getElementById('careerForm');
+        if (careerForm) {
+            careerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i data-lucide="loader-circle" style="width:20px;height:20px;"></i> Lütfen bekleyin...';
+                btn.disabled = true;
+                btn.style.opacity = "0.7";
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    alert('Başvurunuz başarıyla alınmıştır. İK ekibimiz sizinle iletişime geçecektir.');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.style.opacity = "1";
+                    e.target.reset();
+                    lucide.createIcons();
+                }, 2000);
+            });
+        }
+
+        const quickCvForm = document.getElementById('quickCvForm');
+        if (quickCvForm) {
+            quickCvForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i data-lucide="loader-circle" style="width:20px;height:20px;"></i> Lütfen bekleyin...';
+                btn.disabled = true;
+                btn.style.opacity = "0.7";
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    alert('Özgeçmişiniz başarıyla alınmıştır. Teşekkür ederiz.');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.style.opacity = "1";
+                    e.target.reset();
+                    lucide.createIcons();
+                }, 2000);
+            });
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

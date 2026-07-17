@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radyolojik Görüntüleme Sonuçları - İbni Sina Hastanesi</title>
+    <meta name="description" content="İbni Sina Hastanesi radyolojik görüntüleme sonuçları portalı. MR, tomografi, röntgen görüntülerinize ve raporlarınıza online erişin.">
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .page-header {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 110px 0;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 4px solid var(--champagne);
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(9, 32, 63, 0.75); /* Dark Navy Mask */
+            z-index: 1;
+        }
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        .page-header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 16px;
+            font-family: var(--font-heading);
+        }
+        .page-header p {
+            color: var(--slate-200);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Floating background symbols */
+        .bg-symbol {
+            position: absolute;
+            color: var(--navy);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 1200px) {
+            .bg-symbol {
+                display: none;
+            }
+        }
+
+        /* Section Layout */
+        .radio-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .radio-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        .radio-card {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 48px;
+            box-shadow: var(--sh-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .radio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--slate-blue);
+        }
+        .radio-card-premium::before {
+            background-color: var(--champagne);
+        }
+        .radio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sh-md);
+            border-color: var(--slate-blue);
+        }
+        .radio-card-premium:hover {
+            border-color: var(--champagne);
+        }
+        .radio-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--navy);
+            font-family: var(--font-heading);
+        }
+        .radio-card-body {
+            color: var(--slate-600);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Info Card Section */
+        .info-card {
+            background-color: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 40px;
+            box-shadow: var(--sh-sm);
+            margin-top: 40px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+            margin-top: 30px;
+        }
+        .info-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .info-item i, .info-item svg {
+            color: var(--champagne);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .info-item h4 {
+            font-size: 1.1rem;
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-family: var(--font-heading);
+        }
+        .info-item p {
+            color: var(--slate-600);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .radio-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="position: relative; overflow-x: hidden;">
+
+    <!-- Background Medical Symbols (Watermarks) -->
+    <div class="bg-symbol" style="left: 3%; top: 400px; transform: rotate(-15deg);"><i data-lucide="stethoscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 3%; top: 600px; transform: rotate(15deg);"><i data-lucide="heart-pulse" style="width: 140px; height: 140px;"></i></div>
+    <div class="bg-symbol" style="left: 2%; top: 1000px; transform: rotate(45deg);"><i data-lucide="dna" style="width: 130px; height: 130px;"></i></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Radyolojik Tıbbi Görüntüleme</h1>
+            <p>Hastanemizde çekilen MR, Tomografi ve Röntgen tıbbi görüntülerinize ve raporlarınıza online olarak erişin.</p>
+        </div>
+    </section>
+
+    <!-- Radiology Cards -->
+    <section class="radio-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Görüntü ve Rapor Sorgulama</h2>
+                <p>İşlem tarihinize göre uygun sorgulama portalını seçerek sonuçlarınıza anında ulaşabilirsiniz.</p>
+            </div>
+
+            <div class="radio-container">
+                <!-- Before 16 Oct 2025 -->
+                <div class="radio-card">
+                    <div>
+                        <h3>16 Ekim 2025 Öncesi Veriler</h3>
+                        <p class="radio-card-body">
+                            16 Ekim 2025 tarihinden önce hastanemizde çekilen MR, Röntgen, Bilgisayarlı Tomografi gibi radyolojik görüntüleriniz için eski PACS sistemimize masaüstü (PC) veya mobil cihazınızdan erişim sağlayabilirsiniz.
+                        </p>
+                    </div>
+                    <div class="button-group">
+                        <a href="http://195.175.32.98:8085/medipacs/login.aspx?desktop=1&patient=1" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; width: 100%; text-align: center;">
+                            <i data-lucide="monitor" style="width: 18px; height: 18px;"></i>
+                            <span>PC (Masaüstü) Sürümü</span>
+                        </a>
+                        <a href="http://195.175.32.98:8085/medipacs/mobile.aspx?patient=1" target="_blank" class="btn-outline" style="justify-content: center; align-items: center; display: inline-flex; gap: 8px; width: 100%; text-align: center; font-weight: 600;">
+                            <i data-lucide="tablet-smartphone" style="width: 18px; height: 18px;"></i>
+                            <span>Mobil Sürüm</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- After 16 Oct 2025 -->
+                <div class="radio-card radio-card-premium" style="border-color: var(--champagne);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--slate-200); padding-bottom: 12px; margin-bottom: 16px;">
+                            <h3 style="border: none; padding: 0; margin: 0;">16 Ekim 2025 Sonrası Veriler</h3>
+                            <span style="background-color: rgba(29, 78, 137, 0.1); color: var(--slate-blue); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px;">Yeni Portal</span>
+                        </div>
+                        <p class="radio-card-body">
+                            16 Ekim 2025 tarihinden sonraki tüm radyoloji tıbbi görüntüleri ve laboratuvar sonuçlarınız tek bir çatı altında birleştirilmiştir. T.C. Kimlik Numaranız ile yeni sonuç sorgulama portalımıza erişim sağlayabilirsiniz.
+                        </p>
+                    </div>
+                    <div class="button-group">
+                        <a href="http://195.175.32.98:60808/Lab/mDefault.aspx" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; background-color: var(--navy); border-color: var(--navy); color: white; width: 100%; text-align: center;">
+                            <i data-lucide="external-link" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                            <span>Radyoloji & Lab Portalına Git</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Guide Block (Added to prevent looking empty) -->
+            <div class="info-card">
+                <div style="border-left: 4px solid var(--champagne); padding-left: 20px;">
+                    <h3 style="font-size: 1.5rem; color: var(--navy); font-family: var(--font-heading); margin: 0 0 8px 0;">Sonuçları Alırken Dikkat Edilmesi Gerekenler</h3>
+                    <p style="color: var(--slate-600); margin: 0; font-size: 0.95rem;">Tıbbi görüntülerinizi görüntülerken ve değerlendirirken lütfen aşağıdaki hususları göz önünde bulundurunuz:</p>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i data-lucide="user-check" style="width: 24px; height: 24px;"></i>
+                        <div>
+                            <h4>Kimlik Doğrulama</h4>
+                            <p>Sonuçlarınızı görüntülerken T.C. Kimlik numaranızın ve ad soyad bilginizin doğruluğundan emin olun.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="heart-pulse" style="width: 24px; height: 24px;"></i>
+                        <div>
+                            <h4>Hekim Değerlendirmesi</h4>
+                            <p>Radyoloji raporları tanıya yardımcı bulgulardır. Raporunuzu ve görüntülerinizi mutlaka hekiminize danışın.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+                        <div>
+                            <h4>Gizlilik İlkesi</h4>
+                            <p>Hasta mahremiyeti ve KVKK gereği, sonuçlar sadece hastanın kendisi veya resmi vasileri ile paylaşılabilir.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="help-circle" style="width: 24px; height: 24px;"></i>
+                        <div>
+                            <h4>Teknik Destek</h4>
+                            <p>Görüntüleme portallarına erişimde teknik bir problem yaşarsanız çağrı merkezimizle iletişime geçebilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 40px; margin-bottom: 24px; filter: brightness(0) invert(1);">
+                    <p>İbni Sina Hastanesi, modern tıp teknolojileri ve uzman hekim kadrosuyla uluslararası standartlarda hizmet vermektedir.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hızlı Bağlantılar</h4>
+                    <ul class="footer-links">
+                        <li><a href="kurumsal.html">Hakkımızda</a></li>
+                        <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                        <li><a href="doktorlar.html">Doktorlarımız</a></li>
+                        <li><a href="iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hasta Rehberi</h4>
+                    <ul class="footer-links">
+                        <li><a href="hasta-rehberi.html">Ziyaret Saatleri</a></li>
+                        <li><a href="hasta-rehberi.html">Refakatçi Kuralları</a></li>
+                        <li><a href="hasta-rehberi.html">Hasta Hakları</a></li>
+                        <li><a href="hasta-rehberi.html">Anlaşmalı Kurumlar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="map-pin" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> Osmaniye, Türkiye</li>
+                        <li><i data-lucide="phone" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> 0328 813 50 10</li>
+                        <li><i data-lucide="mail" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> info@ibnisinahastanesi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 İbni Sina Hastanesi. Tüm Hakları Saklıdır.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook" style="width: 20px;"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram" style="width: 20px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons Integration -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

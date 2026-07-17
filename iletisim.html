@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim & Ulaşım - İbni Sina Hastanesi</title>
+    <meta name="description" content="Osmaniye Özel İbni Sina Hastanesi iletişim bilgileri, adres, telefon, harita ve mesaj formu.">
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <style>
+        /* Page Header */
+        .page-header {
+            position: relative;
+            background: linear-gradient(120deg, rgba(9,32,63,0.92) 0%, rgba(9,32,63,0.72) 60%, rgba(196,160,79,0.4) 100%),
+                        url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat;
+            padding: 90px 0 70px;
+            text-align: center;
+            border-bottom: 4px solid var(--champagne);
+        }
+        .page-header h1 { color: #fff !important; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+        .page-header p  { color: rgba(255,255,255,0.82) !important; font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+        /* Info Cards Row */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: -44px auto 0;
+            position: relative; z-index: 10;
+        }
+        .info-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 22px;
+            box-shadow: 0 8px 30px rgba(9,32,63,0.12);
+            border: 1px solid rgba(9,32,63,0.07);
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .info-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(9,32,63,0.16); }
+        .info-card-icon {
+            width: 58px; height: 58px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .info-card h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 8px; }
+        .info-card p  { font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.5; }
+        .info-card a  { color: var(--navy); text-decoration: none; }
+        .info-card a:hover { color: var(--champagne); }
+
+        /* Main Grid */
+        .contact-main { display: grid; grid-template-columns: 1.35fr 1fr; gap: 32px; margin-top: 52px; }
+
+        /* Map */
+        .map-wrap { border-radius: 18px; overflow: hidden; box-shadow: 0 6px 24px rgba(9,32,63,0.12); margin-bottom: 28px; height: 320px; }
+        .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+        /* Contact Form Card */
+        .form-card { background: #fff; border-radius: 18px; padding: 36px; box-shadow: 0 6px 24px rgba(9,32,63,0.1); border: 1px solid rgba(9,32,63,0.07); }
+        .form-card h2 { font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .form-card > p { color: #64748b; font-size: 0.97rem; margin-bottom: 26px; }
+        .cf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .cf-group { display: flex; flex-direction: column; gap: 6px; }
+        .cf-group label { font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+        .cf-input {
+            border: 1.5px solid #e2e8f0; border-radius: 10px;
+            padding: 11px 15px; font-size: 0.97rem; font-family: inherit;
+            outline: none; transition: border-color 0.2s, box-shadow 0.2s; background: #f8fafc;
+        }
+        .cf-input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(9,32,63,0.08); background: #fff; }
+        .cf-send {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--navy); color: #fff; border: none;
+            padding: 13px 28px; border-radius: 10px; font-size: 0.97rem;
+            font-weight: 800; font-family: inherit; cursor: pointer; transition: background 0.2s, transform 0.2s;
+            margin-top: 8px;
+        }
+        .cf-send:hover { background: #0b3a70; transform: translateY(-2px); }
+        .success-box { display: none; background: #ecfdf5; border: 1px solid #10b981; border-radius: 12px; padding: 22px; text-align: center; color: #065f46; margin-top: 18px; }
+
+        /* Right: Pharmacy + Working Hours */
+        .sidebar-card { background: #fff; border-radius: 18px; box-shadow: 0 6px 24px rgba(9,32,63,0.1); border: 1px solid rgba(9,32,63,0.07); overflow: hidden; margin-bottom: 22px; }
+        .sidebar-head { background: var(--navy); color: #fff; padding: 22px 24px; display: flex; align-items: center; gap: 12px; }
+        .sidebar-head h3 { color: #fff; font-size: 1.1rem; margin: 0; }
+        .sidebar-head p  { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin: 2px 0 0; }
+        .sidebar-body { padding: 20px 22px; }
+
+        /* Pharmacy mini-card */
+        .pharm-mini { border-bottom: 1px solid #f1f5f9; padding: 16px 0; }
+        .pharm-mini:last-child { border-bottom: none; padding-bottom: 0; }
+        .pharm-mini h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+        .pharm-mini .pharm-addr { font-size: 0.85rem; color: #64748b; display: flex; gap: 6px; align-items: flex-start; margin-bottom: 10px; }
+        .pharm-mini .pharm-btns { display: flex; gap: 8px; }
+        .pharm-btn-call { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; font-size: 0.85rem; font-weight: 700; background: var(--navy); color: #fff; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
+        .pharm-btn-call:hover { background: #0b3a70; }
+        .pharm-btn-nav  { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; font-size: 0.85rem; font-weight: 700; background: transparent; color: var(--navy); border: 1.5px solid var(--navy); border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+        .pharm-btn-nav:hover { background: var(--navy); color: #fff; }
+
+        /* Hours Table */
+        .hours-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.92rem; }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row .day { font-weight: 700; color: var(--navy); }
+        .hours-row .time { color: #64748b; }
+        .badge-open  { background: #dcfce7; color: #16a34a; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 20px; }
+        .badge-24    { background: #fef9c3; color: #92400e; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 20px; }
+
+        @media (max-width: 1024px) {
+            .info-cards { grid-template-columns: 1fr 1fr; }
+            .contact-main { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .info-cards { grid-template-columns: 1fr; }
+            .cf-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html" class="active">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>İletişim &amp; Ulaşım</h1>
+            <p>Hastanemizin adres bilgileri, telefon numaraları, ulaşım haritası ve çevremizdeki güncel nöbetçi eczaneler.</p>
+        </div>
+    </section>
+
+    <!-- Info Cards -->
+    <section class="section" style="padding-top: 60px; background: #f8fafc;">
+        <div class="container">
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon" style="background: linear-gradient(135deg,#09203f,#1a3a6b);">
+                        <i data-lucide="map-pin" style="width:26px;height:26px;color:var(--champagne);"></i>
+                    </div>
+                    <h4>Adres</h4>
+                    <p>Merkez Mah. Sağlık Sok. No:12, Osmaniye</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background: linear-gradient(135deg,#0e7490,#06b6d4);">
+                        <i data-lucide="phone-call" style="width:26px;height:26px;color:#fff;"></i>
+                    </div>
+                    <h4>Çağrı Merkezi</h4>
+                    <p><a href="tel:03288135010">0328 813 50 10</a></p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background: linear-gradient(135deg,#7c3aed,#a78bfa);">
+                        <i data-lucide="mail" style="width:26px;height:26px;color:#fff;"></i>
+                    </div>
+                    <h4>E-Posta</h4>
+                    <p><a href="mailto:info@ibnisinahastanesi.com">info@ibnisinahastanesi.com</a></p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon" style="background: linear-gradient(135deg,#059669,#34d399);">
+                        <i data-lucide="clock" style="width:26px;height:26px;color:#fff;"></i>
+                    </div>
+                    <h4>Acil Servis</h4>
+                    <p>7 gün 24 Saat Açık</p>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="contact-main">
+
+                <!-- Left: Map + Form -->
+                <div>
+                    <!-- Google Maps -->
+                    <div class="map-wrap">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.8!2d36.2368!3d37.0742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDA0JzI3LjEiTiAzNsKwMTQnMTIuNiJF!5e0!3m2!1str!2str!4v1600000000000!5m2!1str!2str"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Osmaniye İbni Sina Hastanesi Konumu">
+                        </iframe>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="form-card">
+                        <h2>Öneri ve Mesaj Formu</h2>
+                        <p>Hizmet kalitemizi artırmamıza yardımcı olun. Düşüncelerinizi paylaşın.</p>
+
+                        <form id="contactForm" style="display: flex; flex-direction: column; gap: 16px;">
+                            <div class="cf-grid">
+                                <div class="cf-group">
+                                    <label for="cName">Adınız Soyadınız</label>
+                                    <input type="text" id="cName" class="cf-input" required placeholder="Ad Soyad">
+                                </div>
+                                <div class="cf-group">
+                                    <label for="cEmail">E-Posta Adresiniz</label>
+                                    <input type="email" id="cEmail" class="cf-input" required placeholder="ornek@eposta.com">
+                                </div>
+                            </div>
+                            <div class="cf-group">
+                                <label for="cSubject">Konu</label>
+                                <input type="text" id="cSubject" class="cf-input" required placeholder="Hangi konuda yazıyorsunuz?">
+                            </div>
+                            <div class="cf-group">
+                                <label for="cMessage">Mesajınız</label>
+                                <textarea id="cMessage" class="cf-input" rows="5" required placeholder="Mesajınızı buraya girin..." style="resize: vertical;"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="cf-send">
+                                    <i data-lucide="send" style="width:18px;height:18px;"></i>
+                                    Mesajı Gönder
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="success-box" id="contactSuccess">
+                            <i data-lucide="check-circle" style="width: 36px; height: 36px; color: #16a34a; margin-bottom: 10px;"></i>
+                            <h4 style="color: #16a34a; font-size: 1.1rem; margin-bottom: 6px;">Mesajınız Başarıyla İletildi!</h4>
+                            <p style="font-size: 0.92rem;">Değerlendirmeleriniz incelenecek ve en kısa sürede geri dönüş yapılacaktır.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Pharmacy + Hours -->
+                <div>
+                    <!-- Nearby Pharmacies -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-head">
+                            <i data-lucide="pill" style="width:28px;height:28px;color:var(--champagne);flex-shrink:0;"></i>
+                            <div>
+                                <h3>Nöbetçi Eczaneler</h3>
+                                <p>Bugün Açık Olan Yakın Eczaneler</p>
+                            </div>
+                        </div>
+                        <div class="sidebar-body">
+                            <div class="pharm-mini">
+                                <h4>Gamze Eczanesi</h4>
+                                <div class="pharm-addr">
+                                    <i data-lucide="map-pin" style="width:14px;height:14px;margin-top:2px;flex-shrink:0;color:#94a3b8;"></i>
+                                    <span>Raufbey Mah. 9552 Sok. No:15/B (Karacamii Sok. 24 Nolu ASM Yanı)</span>
+                                </div>
+                                <div class="pharm-btns">
+                                    <a href="tel:03288252299" class="pharm-btn-call"><i data-lucide="phone" style="width:14px;height:14px;"></i> Ara</a>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Gamze+Eczanesi" target="_blank" class="pharm-btn-nav"><i data-lucide="navigation" style="width:14px;height:14px;"></i> Yol Tarifi</a>
+                                </div>
+                            </div>
+                            <div class="pharm-mini">
+                                <h4>Sarpkaya Eczanesi</h4>
+                                <div class="pharm-addr">
+                                    <i data-lucide="map-pin" style="width:14px;height:14px;margin-top:2px;flex-shrink:0;color:#94a3b8;"></i>
+                                    <span>Kazım Karabekir Mah. 6502 Sok. No:9/B (Kadın Doğum Hastanesi Karşısı)</span>
+                                </div>
+                                <div class="pharm-btns">
+                                    <a href="tel:03288131513" class="pharm-btn-call"><i data-lucide="phone" style="width:14px;height:14px;"></i> Ara</a>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Sarpkaya+Eczanesi" target="_blank" class="pharm-btn-nav"><i data-lucide="navigation" style="width:14px;height:14px;"></i> Yol Tarifi</a>
+                                </div>
+                            </div>
+                            <div class="pharm-mini">
+                                <h4>Aksoy Eczanesi</h4>
+                                <div class="pharm-addr">
+                                    <i data-lucide="map-pin" style="width:14px;height:14px;margin-top:2px;flex-shrink:0;color:#94a3b8;"></i>
+                                    <span>Alibeyli Mah. Kaymakam Cad. No:28/A (Eski Adliye Yanı)</span>
+                                </div>
+                                <div class="pharm-btns">
+                                    <a href="tel:03288135050" class="pharm-btn-call"><i data-lucide="phone" style="width:14px;height:14px;"></i> Ara</a>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Aksoy+Eczanesi" target="_blank" class="pharm-btn-nav"><i data-lucide="navigation" style="width:14px;height:14px;"></i> Yol Tarifi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-head">
+                            <i data-lucide="clock" style="width:28px;height:28px;color:var(--champagne);flex-shrink:0;"></i>
+                            <div>
+                                <h3>Çalışma Saatleri</h3>
+                                <p>Poliklinik &amp; Bölüm Saatleri</p>
+                            </div>
+                        </div>
+                        <div class="sidebar-body">
+                            <div class="hours-row">
+                                <span class="day">Pazartesi â€“ Cuma</span>
+                                <span class="time">08:00 â€“ 18:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span class="day">Cumartesi</span>
+                                <span class="time">08:00 â€“ 14:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span class="day">Pazar</span>
+                                <span class="time">Kapalı (Acil Açık)</span>
+                            </div>
+                            <div class="hours-row" style="margin-top: 8px; border-top: 2px solid #f1f5f9; padding-top: 14px;">
+                                <span class="day" style="display: flex; align-items: center; gap: 8px;">
+                                    <i data-lucide="siren" style="width:16px;height:16px;color:#dc2626;"></i>
+                                    Acil Servis
+                                </span>
+                                <span class="badge-24">7/24 Açık</span>
+                            </div>
+                            <div class="hours-row">
+                                <span class="day" style="display: flex; align-items: center; gap: 8px;">
+                                    <i data-lucide="flask-conical" style="width:16px;height:16px;color:#0e7490;"></i>
+                                    Laboratuvar
+                                </span>
+                                <span class="badge-24">7/24 Açık</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social / Quick Contact -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-head" style="background: linear-gradient(135deg,#b45309,#f59e0b);">
+                            <i data-lucide="share-2" style="width:28px;height:28px;color:#fff;flex-shrink:0;"></i>
+                            <div>
+                                <h3 style="color:#fff;">Sosyal Medya</h3>
+                                <p style="color:rgba(255,255,255,0.75);">Bizi takip edin</p>
+                            </div>
+                        </div>
+                        <div class="sidebar-body" style="display: flex; flex-direction: column; gap: 12px;">
+                            <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #f0f4ff; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.95rem; transition: background 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#f0f4ff'">
+                                <i data-lucide="facebook" style="width:20px;height:20px;color:#1877f2;"></i> Facebook
+                            </a>
+                            <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #fdf2f8; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.95rem; transition: background 0.2s;" onmouseover="this.style.background='#fce7f3'" onmouseout="this.style.background='#fdf2f8'">
+                                <i data-lucide="instagram" style="width:20px;height:20px;color:#e1306c;"></i> Instagram
+                            </a>
+                            <a href="http://twitter.com/ibnisinahastane" target="_blank" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #eff6ff; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.95rem; transition: background 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                                <i data-lucide="twitter" style="width:20px;height:20px;color:#1da1f2;"></i> Twitter / X
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-container">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+                </a>
+                <p>Modern tıbbın tüm imkanlarını insan odaklı yaklaşımla birleştirerek güvenilir sağlık hizmeti sunuyoruz.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Hızlı Erişim</h4>
+                <ul>
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Kurumsal</h4>
+                <ul>
+                    <li><a href="kurumsal.html">Hakkımızda</a></li>
+                    <li><a href="kurumsal.html">Kalite Politikamız</a></li>
+                    <li><a href="is-basvurusu.html">İş Başvurusu</a></li>
+                    <li><a href="nobetci-eczaneler.html">Nöbetçi Eczaneler</a></li>
+                    <li><a href="e-bulten.html">E-Bülten</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>İletişim Bilgileri</h4>
+                <ul>
+                    <li>
+                        <i data-lucide="map-pin"></i>
+                        <span>Merkez Mah. Sağlık Sok. No:12, Osmaniye</span>
+                    </li>
+                    <li>
+                        <i data-lucide="phone"></i>
+                        <span>0328 813 50 10</span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail"></i>
+                        <span>info@ibnisinahastanesi.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 İbni Sina Hastanesi. Tüm hakları saklıdır.</p>
+            <p>Design with health in mind</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            const success = document.getElementById('contactSuccess');
+            success.style.display = 'block';
+            lucide.createIcons();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,480 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birim Detayı | İbni Sina Hastanesi</title>
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .dept-details-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .details-card {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 48px;
+            box-shadow: var(--sh-sm);
+        }
+        .sidebar-card {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 32px;
+            box-shadow: var(--sh-sm);
+        }
+        .treatment-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 32px 0;
+        }
+        .treatment-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            color: var(--navy);
+            font-weight: 500;
+        }
+        .treatment-item i {
+            color: var(--champagne);
+            flex-shrink: 0;
+        }
+        .doctor-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            background-color: var(--slate-50);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+        .doctor-row:hover {
+            border-color: var(--champagne);
+            transform: translateY(-2px);
+            box-shadow: var(--sh-sm);
+        }
+        .doctor-row-img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--champagne);
+            flex-shrink: 0;
+        }
+        .doctor-row-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .sidebar-nav-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-radius: var(--r-sm);
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 600;
+            background-color: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            transition: var(--transition);
+        }
+        .sidebar-nav-link:hover, .sidebar-nav-link.active {
+            background-color: var(--navy);
+            color: var(--white);
+            border-color: var(--navy);
+        }
+        .sidebar-nav-link.active span {
+            color: var(--white);
+        }
+        .sidebar-nav-link.active i {
+            color: var(--champagne);
+        }
+        @media (max-width: 1024px) {
+            .dept-details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header (Hero style background) -->
+    <section id="deptHeaderBanner" style="position: relative; height: 380px; display: flex; align-items: center; background-size: cover; background-position: center; border-bottom: 4px solid var(--champagne); padding: 0;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(9, 32, 63, 0.88) 0%, rgba(9, 32, 63, 0.65) 100%); z-index: 1;"></div>
+        <div class="container" style="text-align: left; z-index: 10; position: relative; color: var(--white);">
+            <div style="display: flex; gap: 8px; color: var(--slate-200); font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1.5px;">
+                <a href="index.html" style="color: var(--slate-200);">Anasayfa</a>
+                <span>/</span>
+                <a href="departmanlar.html" style="color: var(--slate-200);">Tıbbi Birimler</a>
+                <span>/</span>
+                <span id="breadcrumbDept" style="color: var(--champagne);">Acil Servis</span>
+            </div>
+            <h1 id="deptNameTitle" style="color: var(--white); font-size: 3.2rem; margin-bottom: 12px; font-family: var(--font-heading);">Acil Servis</h1>
+            <p id="deptShortDesc" style="color: var(--slate-200); font-size: 1.3rem; max-width: 650px; line-height: 1.6;">7/24 Kesintisiz Acil Müdahale ve Ambulans Hizmetleri</p>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section-padding" style="background-color: var(--slate-50);">
+        <div class="container dept-details-grid">
+            <!-- Left Column: Details -->
+            <div class="details-card">
+                <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--navy); font-family: var(--font-heading); border-bottom: 2px solid var(--slate-100); padding-bottom: 16px;">Birim Hakkında</h2>
+                <p id="deptBio" style="color: var(--slate-600); font-size: 1.05rem; line-height: 1.8; margin-bottom: 36px;">
+                    Her türlü acil müdahale gerektiren hastalara 24 saat bakılmaktadır. Tahlil ve tetkiklerden sonra hastalara teşhis konulup tedavileri yapılmaktadır 7/24 acil ambulans servis hizmeti verilmektedir. Sevk edilmesi gereken acil hastaların gideceği hastane organizasyonu önceden yapılmaktadır.
+                </p>
+
+                <h3 style="font-size: 1.4rem; margin-bottom: 20px; color: var(--navy); font-family: var(--font-heading);">Birim Görselleri</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 36px;" id="deptGallery">
+                    <!-- Dynamic images will be loaded here -->
+                </div>
+
+                <h3 style="font-size: 1.4rem; margin-bottom: 20px; color: var(--navy); font-family: var(--font-heading);">Hizmetler ve Tedaviler</h3>
+                <ul class="treatment-list" id="deptTreatments">
+                    <!-- Dynamic treatments -->
+                </ul>
+
+                <h3 style="font-size: 1.4rem; margin-top: 48px; margin-bottom: 24px; color: var(--navy); font-family: var(--font-heading); border-top: 2px solid var(--slate-100); padding-top: 32px;">Birim Hekimlerimiz</h3>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 16px;" id="deptDoctors">
+                    <!-- Dynamic doctors list -->
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar -->
+            <aside style="display: flex; flex-direction: column; gap: 32px;">
+                <div class="sidebar-card">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 24px; border-left: 4px solid var(--champagne); padding-left: 12px; color: var(--navy); font-family: var(--font-heading);">Tıbbi Birimler</h3>
+                    <ul class="sidebar-nav">
+                        <li><a href="birim-detay.html?dept=acil" class="sidebar-nav-link" id="nav-acil"><span>Acil Servis</span> <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a></li>
+                        <li><a href="birim-detay.html?dept=kardiyoloji" class="sidebar-nav-link" id="nav-kardiyoloji"><span>Kardiyoloji</span> <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a></li>
+                        <li><a href="birim-detay.html?dept=pediatri" class="sidebar-nav-link" id="nav-pediatri"><span>Çocuk Sağlığı</span> <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a></li>
+                        <li><a href="birim-detay.html?dept=noroloji" class="sidebar-nav-link" id="nav-noroloji"><span>Nöroloji</span> <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a></li>
+                        <li><a href="birim-detay.html?dept=ortopedi" class="sidebar-nav-link" id="nav-ortopedi"><span>Ortopedi</span> <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-card" style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); color: var(--white); border: none; text-align: center; padding: 40px 32px;">
+                    <i data-lucide="phone-call" style="width: 48px; height: 48px; color: var(--champagne); margin-bottom: 20px; display: inline-block;"></i>
+                    <h3 style="color: var(--white); font-size: 1.3rem; margin-bottom: 12px; font-family: var(--font-heading);">Online Danışma</h3>
+                    <p style="color: var(--slate-200); font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px;">Merak ettiğiniz konular veya hızlı randevu işlemleri için İletişim Merkezimizle görüşün.</p>
+                    <a href="tel:03288135010" class="btn-primary" style="justify-content: center; width: 100%; font-weight: 700; background-color: var(--champagne); color: var(--navy); border: none;">
+                        <span>0328 813 50 10</span>
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 40px; margin-bottom: 24px; filter: brightness(0) invert(1);">
+                    <p>İbni Sina Hastanesi, modern tıp teknolojileri ve uzman hekim kadrosuyla uluslararası standartlarda hizmet vermektedir.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hızlı Bağlantılar</h4>
+                    <ul class="footer-links">
+                        <li><a href="kurumsal.html">Hakkımızda</a></li>
+                        <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                        <li><a href="doktorlar.html">Doktorlarımız</a></li>
+                        <li><a href="iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hasta Rehberi</h4>
+                    <ul class="footer-links">
+                        <li><a href="hasta-rehberi.html">Ziyaret Saatleri</a></li>
+                        <li><a href="hasta-rehberi.html">Refakatçi Kuralları</a></li>
+                        <li><a href="hasta-rehberi.html">Hasta Hakları</a></li>
+                        <li><a href="hasta-rehberi.html">Anlaşmalı Kurumlar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="map-pin" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> Osmaniye, Türkiye</li>
+                        <li><i data-lucide="phone" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> 0328 813 50 10</li>
+                        <li><i data-lucide="mail" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> info@ibnisinahastanesi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 İbni Sina Hastanesi. Tüm Hakları Saklıdır.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook" style="width: 20px;"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram" style="width: 20px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons & Render logic -->
+    <script>
+        lucide.createIcons();
+
+        // Responsive Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Departments DB with premium Unsplash background images & professional doctor images
+        const departmentsDB = {
+            "acil": {
+                name: "Acil Servis",
+                banner: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?q=80&w=1200&auto=format&fit=crop",
+                shortDesc: "7/24 Kesintisiz Acil Müdahale ve Ambulans Hizmetleri",
+                bio: "Her türlü acil müdahale gerektiren hastalara 24 saat bakılmaktadır. Tahlil ve tetkiklerden sonra hastalara teşhis konulup tedavileri yapılmaktadır 7/24 acil ambulans servis hizmeti verilmektedir. Sevk edilmesi gereken acil hastaların gideceği hastane organizasyonu önceden yapılmaktadır.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=600&auto=format&fit=crop"
+                ],
+                treatments: [
+                    "Acil Tıbbi Müdahale",
+                    "Acil Gözlem ve Takip",
+                    "Enjeksiyon ve Pansuman Hizmetleri",
+                    "Resüsitasyon (Yeniden Canlandırma)",
+                    "7/24 Ambulans Sevk ve Taşıma"
+                ],
+                doctors: [
+                    { name: "Opr. Dr. Turan Alisoy", title: "Genel Cerrahi Uzmanı", img: "https://www.ibnisinahastanesi.com.tr/resim/icerik/tn/tt.jpg", link: "doktorlar.html" },
+                    { name: "Pratisyen Hekim Hakan Sevimli", title: "Acil Hekimi", img: "https://www.ibnisinahastanesi.com.tr/resim/icerik/tn/hakan-sevimli.jpeg", link: "doktorlar.html" },
+                    { name: "Pratisyen Hekim Ömer Levent Torun", title: "Acil Hekimi", img: "https://www.ibnisinahastanesi.com.tr/resim/icerik/tn/WhatsApp-Image-2019-08-09-at-16.51.52.jpeg", link: "doktorlar.html" }
+                ]
+            },
+            "kardiyoloji": {
+                name: "Kardiyoloji",
+                banner: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop",
+                shortDesc: "Gelişmiş Kalp ve Damar Sağlığı Teşhis ve Tedavi Merkezi",
+                bio: "Kalp yetersizliği, koroner damar tıkanıklıkları, ritim bozuklukları ve hipertansiyon tanı ve tedavileri modern ekokardiyografi laboratuvarlarımızda sunulmaktadır.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?q=80&w=600&auto=format&fit=crop"
+                ],
+                treatments: [
+                    "Ekokardiyografi (EKO)",
+                    "Efor Testi (Treadmill)",
+                    "EKG ve Tansiyon Holter Takibi",
+                    "Koroner Anjiyografi ve Stent Uygulamaları",
+                    "Kalp Pili Programlama"
+                ],
+                doctors: [
+                    { name: "Prof. Dr. Ahmet Yılmaz", title: "Kardiyoloji Uzmanı", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDdc6_6XaKF5Gtv9j2CVrZolmMNKCMbpbbPKqhzQVoKGUy_vUlX7bolxqEMPS1u4w3T3ZgNDjgyhg3YvoxLD2rc7Qv7vdjUwrfRx9AbzXT8yJ8NgC3Lfk8IDYCDV0WXXAKx_LFSxFm3sx8p4fD92RqBCcYpgUN48uNg8CSZwoZiYihsgI-5k_l80b5sg8Z3lWqk6wSZhcvPKHg95IBJ_TiTlLlKM96LBdbDLlWgRNVBBCzHcYk3i6pn", link: "doktorlar.html" }
+                ]
+            },
+            "pediatri": {
+                name: "Çocuk Sağlığı ve Hastalıkları",
+                banner: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=1200&auto=format&fit=crop",
+                shortDesc: "Bebeklikten Ergenliğe Åefkatli ve Uzman Çocuk Takibi",
+                bio: "0-18 yaş grubundaki childlerin rutin büyüme gelişme takibi, beslenme rehberliği, aşı takipleri ve çocukluk çağı hastalıklarının tedavisi uzman hekimlerce yapılır.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1502740479091-635887520276?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=600&auto=format&fit=crop"
+                ],
+                treatments: [
+                    "Rutin Bebek ve Çocuk Gelişim Takibi",
+                    "Aşı Planlaması ve Takibi",
+                    "Pediatrik Enfeksiyon Hastalıkları Tedavisi",
+                    "Çocuk Beslenme ve Diyet Rehberliği",
+                    "Yenidoğan Takibi ve Küvöz Hizmetleri"
+                ],
+                doctors: [
+                    { name: "Uzm. Dr. Ayten Yıldız", title: "Çocuk Sağlığı Uzmanı", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD5wDhuYIL3RCuW11YNUAEC-EPo4LHFuNtRgxdenzTREqsfwRNodnhifRxg4yP4SQgz-6ngpn3U-wZSIn9G_g2pAH2_mFD7Ie08EDCDrAYAEcFbxJNgh8K1VUpX-ZoaFmXMfm9NvDNla6X0LGGHG-LFbcN5wsxa1bzmQC2bnn-NOIFs-IvA0wgkVfCIiSZNMmF_R71Y8II6YhCLefVn19V4lJimx2mg04kOP41mSa5wgAZJ77sbSQ_1", link: "doktorlar.html" }
+                ]
+            },
+            "noroloji": {
+                name: "Nöroloji",
+                banner: "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1200&auto=format&fit=crop",
+                shortDesc: "Beyin ve Sinir Sistemi Teşhis ve Tedavi Uzmanlığı",
+                bio: "Migren başta olmak üzere baş ağrıları, Parkinson, Alzheimer, inme, epilepsi ve kas-sinir hastalıkları ileri tıbbi cihazlar eşliğinde teşhis and tedavi edilmektedir.",
+                gallery: [
+                    "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=600&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=600&auto=format&fit=crop"
+                ],
+                treatments: [
+                    "EEG (Elektroensefalografi)",
+                    "EMG (Elektromiyografi)",
+                    "Demans ve Alzheimer Erken Teşhisi",
+                    "Migren ve Baş Ağrısı Yönetimi",
+                    "Felç Sonrası Nörolojik Takip"
+                ],
+                doctors: [
+                    { name: "Dr. Ömer Özkan", title: "Nöroloji Uzmanı", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuC7XAUMujX2oSjRlX6EZx3loB8QE-BZKySmSbwB_qsxtPTh6lWv08FYqBcGUmTgYu8kKjUzaNZvaUh96zdh0dlDlPAId3SV6qh_yJHJVyq3TBsDC_r_pbzKHm9Xej--HsHCUv0BPec6eFPp7Guk_-KeHhf9T_1Fp9EiH8oRNMv98Hpm8ZF7Dg5eMBso4w5vDo4z4iwvTk1V2TfnI3kP18FrM9YfN9zf5jmE_c1mdS917TBSGP6uaHrV", link: "doktorlar.html" }
+                ]
+            },
+            "ortopedi": {
+                name: "Ortopedi ve Travmatoloji",
+                banner: "img/orthopedics_department.png",
+                shortDesc: "Eklem, Kemik ve Kas Sistemi Cerrahi ve Travma Tedavileri",
+                bio: "Eklem kireçlenmeleri, diz-kalça protez ameliyatları, spor yaralanmaları, bağ kopmaları ve travmatik kırık-çıkık ameliyatları başarıyla gerçekleştirilmektedir.",
+                gallery: [
+                    "img/orthopedics_department.png",
+                    "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?q=80&w=600&auto=format&fit=crop"
+                ],
+                treatments: [
+                    "Artroskopi (Kapalı Eklem Cerrahisi)",
+                    "Diz ve Kalça Protez Ameliyatları",
+                    "Kırık ve Çıkık Tedavileri (Travma)",
+                    "Skolyoz ve Omurga Eğriliği Takibi",
+                    "Spor Yaralanmaları ve Rehabilitasyonu"
+                ],
+                doctors: [
+                    { name: "Op. Dr. Alper Andaç", title: "Ortopedi Uzmanı", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDgNP7FLP1wmaXwTX8U3vYxAB_3QUdqKpPzzEX50Y1wSZpnGSu0LN1xbZnUSO4NdnGEG8-TidAbygjLlkXoKJGGvmPpkp_uwZe8VhcbnFQ206mq5KKDAAlimAgDY1wL__IWK92lF7NCm0p85jGyaFU2cc_fc38soo8Z8357TW0QJQsMXEeICh-BP5L5qOeiC3A2s77j1mgQQj6rzNS0TAZb-tFdx_7ofgxQhUdktSr3lykzkpP5LdXD", link: "doktorlar.html" }
+                ]
+            }
+        };
+
+        // Parse query params
+        const urlParams = new URLSearchParams(window.location.search);
+        let deptKey = urlParams.get('dept') || 'acil';
+
+        // Fallback if department key is not in DB
+        if (!departmentsDB[deptKey]) {
+            deptKey = 'acil';
+        }
+
+        const dept = departmentsDB[deptKey];
+
+        // Populate elements
+        document.getElementById('breadcrumbDept').innerText = dept.name;
+        document.getElementById('deptNameTitle').innerText = dept.name;
+        document.getElementById('deptShortDesc').innerText = dept.shortDesc;
+        document.getElementById('deptBio').innerText = dept.bio;
+
+        // Render gallery
+        const galleryContainer = document.getElementById('deptGallery');
+        if (galleryContainer) {
+            galleryContainer.innerHTML = '';
+            if (dept.gallery) {
+                dept.gallery.forEach(imgUrl => {
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.alt = dept.name;
+                    img.style.width = '100%';
+                    img.style.height = '180px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = 'var(--r-md)';
+                    img.style.border = '1.5px solid var(--slate-200)';
+                    galleryContainer.appendChild(img);
+                });
+            }
+        }
+
+        // Set banner
+        document.getElementById('deptHeaderBanner').style.backgroundImage = `url('${dept.banner}')`;
+
+        // Set active sidebar item
+        const activeNav = document.getElementById(`nav-${deptKey}`);
+        if (activeNav) {
+            activeNav.classList.add('active');
+        }
+
+        // Render treatments
+        const treatmentsList = document.getElementById('deptTreatments');
+        treatmentsList.innerHTML = '';
+        dept.treatments.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'treatment-item';
+            li.innerHTML = `<i data-lucide="check-circle-2"></i> <span>${item}</span>`;
+            treatmentsList.appendChild(li);
+        });
+
+        // Render doctors
+        const doctorsContainer = document.getElementById('deptDoctors');
+        doctorsContainer.innerHTML = '';
+        dept.doctors.forEach(doc => {
+            const a = document.createElement('a');
+            a.href = doc.link;
+            a.className = 'doctor-row';
+            a.innerHTML = `
+                <div class="doctor-row-img">
+                    <img src="${doc.img}" alt="${doc.name}">
+                </div>
+                <div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 4px; font-weight: 700; color: var(--navy);">${doc.name}</h4>
+                    <p style="color: var(--slate-600); font-size: 0.85rem;">${doc.title}</p>
+                </div>
+            `;
+            doctorsContainer.appendChild(a);
+        });
+
+        // Reinitialize Lucide icons for dynamically added elements
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+
+
+

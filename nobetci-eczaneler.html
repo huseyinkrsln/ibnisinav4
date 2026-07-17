@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nöbetçi Eczaneler | İbni Sina Hastanesi</title>
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .page-header {
+            position: relative;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS54biwN118xwYl7wf7hGGRK8MRwGzMVSOHnznMUc63q2KzxMs0mrVPQvv&s=10');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: var(--white);
+            text-align: center;
+            border-bottom: 4px solid var(--champagne);
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(9, 32, 63, 0.70); /* Görselin daha belirgin olması için opaklık %70'e düşürüldü */
+            z-index: 1;
+        }
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        .page-header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 16px;
+            font-family: var(--font-heading);
+        }
+        .page-header p {
+            color: var(--slate-200);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 80px 0;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .pharmacy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 24px;
+        }
+        .pharmacy-card {
+            background-color: var(--white);
+            border: 1.5px solid var(--slate-200);
+            border-radius: var(--r-md);
+            padding: 32px;
+            box-shadow: var(--sh-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        .pharmacy-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sh-lg);
+            border-color: var(--champagne);
+        }
+        .pharmacy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .district-badge {
+            background-color: var(--navy);
+            color: var(--champagne);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: var(--r-sm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--champagne);
+        }
+        .pharmacy-body {
+            flex-grow: 1;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .info-row {
+            display: flex;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--slate-600);
+            line-height: 1.6;
+        }
+        .info-row svg {
+            color: var(--champagne);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        .pharmacy-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Floating background icons */
+        .bg-symbol {
+            position: absolute;
+            color: var(--navy);
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 1200px) {
+            .bg-symbol {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .pharmacy-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .pharmacy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="position: relative; overflow-x: hidden; background-color: var(--slate-50);">
+
+    <!-- Background Medical Symbols (Watermarks) -->
+    <div class="bg-symbol" style="left: 3%; top: 400px; transform: rotate(-15deg);"><i data-lucide="stethoscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 3%; top: 600px; transform: rotate(15deg);"><i data-lucide="heart-pulse" style="width: 140px; height: 140px;"></i></div>
+    <div class="bg-symbol" style="right: 3.5%; top: 900px; transform: rotate(-15deg);"><i data-lucide="microscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="left: 2%; top: 1100px; transform: rotate(45deg);"><i data-lucide="dna" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="left: 2.5%; top: 1350px; transform: rotate(15deg);"><i data-lucide="clipboard-list" style="width: 120px; height: 120px;"></i></div>
+    <div class="bg-symbol" style="right: 2%; top: 1600px; transform: rotate(-25deg);"><i data-lucide="pill" style="width: 110px; height: 110px;"></i></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne); font-weight: bold;"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 style="color: var(--white) !important; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); font-weight: 800;">Nöbetçi Eczaneler</h1>
+            <p style="color: var(--slate-100) !important; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); font-weight: 500;">Sağlığınız için Osmaniye ve çevre ilçelerindeki en güncel nöbetçi eczane bilgileri.</p>
+        </div>
+    </section>
+
+    <!-- Filters & Cards Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="pharmacy-grid" id="pharmacyContainer">
+                <!-- Card 1 -->
+                <div class="pharmacy-card" data-district="MERKEZ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Merkez</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">GAMZE ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Raufbey Mahallesi 9552 Sokak No:15/B (Karacamii Sokağı 24 Nolu ASM Yanı, Aysanlar Petrol Civarı)</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 825 22 99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:03288252299" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Gamze+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="pharmacy-card" data-district="MERKEZ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Merkez</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">SARPKAYA ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Kazım Karabekir Mah. 6502 Sokak No:9/B (Kadın Doğum Hastanesi Karşısı)</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 813 15 13</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:03288131513" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Sarpkaya+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="pharmacy-card" data-district="MERKEZ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Merkez</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">VUSLAT ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Karaçay Mah. 6009 Sokak No:2/A</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 825 82 11</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:0328 825 82 11" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Vuslat+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="pharmacy-card" data-district="BAHÇE">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Bahçe</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">AÇIKGÖZ ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Bahçelievler Mah. Devlet Bahçeli Bulvarı No:11/C (1 Nolu ASM Karşısı)</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 861 44 33</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:03288614433" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Bahce+Acikgoz+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="pharmacy-card" data-district="DÜZİÇİ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Düziçi</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">ELMAS ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Yeşilova Mah. Aydınlar Sokak No:42</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0543 261 34 08</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:05432613408" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Duzici+Elmas+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="pharmacy-card" data-district="KADİRLİ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Kadirli</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">GÜZİN ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Tufanpaşa Mah. 69 Sokak No:1 (1 Nolu ASM Karşısı, İlçe Tarım Civarı)</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 717 81 17</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:03287178117" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Kadirli+Guzin+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="pharmacy-card" data-district="KADİRLİ">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Kadirli</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">CAN ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Mustafa Yağız Mah. Arslantaş Cad. No:119/A (Karatepe Yolu Üzeri, Halet Çambel İlkokulu Yanı)</span>
+                            </div>
+                            <div class="info-row" style="opacity: 0.7; font-style: italic;">
+                                <i data-lucide="info" style="width: 18px; height: 18px;"></i>
+                                <span>Telefon bilgisi bulunmamaktadır.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions" style="grid-template-columns: 1fr;">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Kadirli+Can+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="pharmacy-card" data-district="TOPRAKKALE">
+                    <div>
+                        <div class="pharmacy-header">
+                            <span class="district-badge">Toprakkale</span>
+                            <i data-lucide="pill" style="color: var(--champagne); width: 28px; height: 28px;"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 16px; color: var(--navy);">TOPRAKKALE ECZANESİ</h3>
+                        <div class="pharmacy-body">
+                            <div class="info-row">
+                                <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                                <span>Toprakkale Devlet Hastanesi Karşısı</span>
+                            </div>
+                            <div class="info-row">
+                                <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+                                <span>0328 633 20 53</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pharmacy-actions">
+                        <a href="tel:03286332053" class="btn-outline" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; font-weight: 700;"><i data-lucide="phone" style="width: 16px; height: 16px;"></i> Ara</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Toprakkale+Eczanesi" target="_blank" class="btn-primary" style="justify-content: center; gap: 8px; text-decoration: none; padding: 10px 16px; border: none; font-weight: 700;"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i> Yol Tarifi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Support Panel -->
+    <section class="content-section" style="border-top: 1.5px solid var(--slate-200); background-color: var(--white); padding: 80px 0;">
+        <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center;">
+            <div style="position: relative; border-radius: var(--r-md); overflow: hidden; height: 380px; box-shadow: var(--sh-lg); border: 2.5px solid var(--champagne);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.954625298835!2d36.244342576916524!3d37.070498252277636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1528f117f7ad9987%3A0xc3c5d6b46ef32845!2s%C3%96zel%20%C4%B0bni%20Sina%20Hastanesi!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div style="position: absolute; bottom: 24px; left: 24px; background-color: var(--white); border-radius: var(--r-sm); border: 1.5px solid var(--slate-200); padding: 16px; display: flex; gap: 12px; align-items: center; box-shadow: var(--sh-md); z-index: 10;">
+                    <div style="background-color: var(--navy); color: var(--champagne); padding: 8px; border-radius: var(--r-sm); border: 1px solid var(--champagne);"><i data-lucide="map-pin" style="width: 24px; height: 24px;"></i></div>
+                    <div>
+                        <h4 style="font-family: var(--font-heading); color: var(--navy); font-weight: 700; font-size: 0.95rem; margin: 0;">İbni Sina Hastanesi Konumu</h4>
+                        <p style="color: var(--slate-600); font-size: 0.8rem; margin: 4px 0 0 0;">Yol tarifi almak için haritayı büyütebilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 style="font-family: var(--font-heading); color: var(--navy); font-size: 2rem; margin-bottom: 20px; text-align: left;">Acil Durumlar İçin 7/24 Yanınızdayız</h2>
+                <p style="color: var(--slate-600); font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px;">
+                    Hastanemiz acil servisi 7 gün 24 saat kesintisiz ve uzman hekim kadrosuyla hizmet vermektedir. İlaç temini konusunda sıkıntı yaşamanız durumunda en yakın nöbetçi eczaneye yönlendirme and destek için acil danışmamızdan her an bilgi alabilirsiniz.
+                </p>
+                <div style="background-color: var(--slate-50); border: 1.5px solid var(--slate-200); border-radius: var(--r-md); padding: 24px; display: flex; gap: 16px; align-items: center;">
+                    <div style="color: var(--navy); background-color: var(--white); padding: 12px; border-radius: var(--r-sm); border: 1px solid var(--slate-200);"><i data-lucide="phone-call" style="width: 32px; height: 32px; color: var(--champagne);"></i></div>
+                    <div>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--slate-600); text-transform: uppercase; letter-spacing: 1px;">Hastane Acil Danışma Hattı</span>
+                        <p style="font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-top: 4px;">0328 813 50 10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 40px; margin-bottom: 24px; filter: brightness(0) invert(1);">
+                    <p>İbni Sina Hastanesi, modern tıp teknolojileri ve uzman hekim kadrosuyla uluslararası standartlarda hizmet vermektedir.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hızlı Bağlantılar</h4>
+                    <ul class="footer-links">
+                        <li><a href="kurumsal.html">Hakkımızda</a></li>
+                        <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                        <li><a href="doktorlar.html">Doctorlarımız</a></li>
+                        <li><a href="iletisim.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Hasta Rehberi</h4>
+                    <ul class="footer-links">
+                        <li><a href="hasta-rehberi.html">Ziyaret Saatleri</a></li>
+                        <li><a href="hasta-rehberi.html">Refakatçi Kuralları</a></li>
+                        <li><a href="hasta-rehberi.html">Hasta Hakları</a></li>
+                        <li><a href="hasta-rehberi.html">Anlaşmalı Kurumlar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="map-pin" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> Osmaniye, Türkiye</li>
+                        <li><i data-lucide="phone" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> 0328 813 50 10</li>
+                        <li><i data-lucide="mail" style="width: 16px; margin-right: 8px; display: inline-block; vertical-align: middle;"></i> info@ibnisinahastanesi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 İbni Sina Hastanesi. Tüm Hakları Saklıdır.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank"><i data-lucide="facebook" style="width: 20px;"></i></a>
+                    <a href="http://twitter.com/ibnisinahastane" target="_blank"><i data-lucide="twitter" style="width: 20px;"></i></a>
+                    <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank"><i data-lucide="instagram" style="width: 20px;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+

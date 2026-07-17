@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online İşlemler - İbni Sina Hastanesi</title>
+    <link rel="stylesheet" href="css/style.css?v=2.1">
+    <style>
+        .online-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .online-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        .online-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .online-card-icon {
+            width: 64px;
+            height: 64px;
+            background-color: var(--bg-main);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .online-card-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        .security-section {
+            background-color: var(--bg-main);
+            border-radius: var(--radius-lg);
+            padding: 60px;
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .security-badge-container {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 380px;
+            box-shadow: var(--shadow-md);
+        }
+        .security-badge-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .security-floating-icon {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+        }
+        @media (max-width: 900px) {
+            .online-grid {
+                grid-template-columns: 1fr;
+            }
+            .security-section {
+                grid-template-columns: 1fr;
+                padding: 32px;
+            }
+            .security-badge-container {
+                height: 240px;
+                order: -1;
+            }
+        }
+        /* Floating background symbols */
+        .bg-symbol {
+            position: absolute;
+            color: var(--navy);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @media (max-width: 1200px) {
+            .bg-symbol {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body style="position: relative; overflow-x: hidden;">
+
+    <!-- Background Medical Symbols (Watermarks) -->
+    <div class="bg-symbol" style="left: 3%; top: 400px; transform: rotate(-15deg);"><i data-lucide="stethoscope" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 3%; top: 600px; transform: rotate(15deg);"><i data-lucide="heart-pulse" style="width: 140px; height: 140px;"></i></div>
+    <div class="bg-symbol" style="left: 2%; top: 1000px; transform: rotate(45deg);"><i data-lucide="dna" style="width: 130px; height: 130px;"></i></div>
+    <div class="bg-symbol" style="right: 2.5%; top: 1350px; transform: rotate(-25deg);"><i data-lucide="pill" style="width: 110px; height: 110px;"></i></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span style="margin-right: 20px;"><a href="tel:03288135010" style="color: inherit;"><i data-lucide="phone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 0328 813 50 10</a></span>
+                <span><i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> info@ibnisinahastanesi.com</span>
+            </div>
+            <div class="top-links" style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.facebook.com/pages/Osmaniye-%C3%96zel-%C4%B0bnisina-Hastanesi/132233293653245?fref=ts" target="_blank" aria-label="Facebook"><i data-lucide="facebook" style="width: 16px; height: 16px;"></i></a>
+                <a href="http://twitter.com/ibnisinahastane" target="_blank" aria-label="Twitter"><i data-lucide="twitter" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Osmaniye+Ozel+Ibni+Sina+Hastanesi" target="_blank" aria-label="Google Maps"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i></a>
+                <a href="https://www.instagram.com/osmaniyeibnisinahastanesi/" target="_blank" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç"><i data-lucide="menu"></i></button>
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li><a href="departmanlar.html">Tıbbi Birimler</a></li>
+                    <li><a href="doktorlar.html">Hekimlerimiz</a></li>
+                    <li><a href="hasta-rehberi.html">Hasta Rehberi</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--slate-200); padding-right: 16px;">
+                    <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy); cursor: pointer;">TR</span>
+                    <span style="color: var(--slate-600); font-size: 0.85rem;">|</span>
+                    <span style="font-weight: 500; font-size: 0.85rem; color: var(--slate-600); cursor: pointer;">EN</span>
+                </div>
+                <a href="tel:03288135010" style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--navy); font-size: 0.95rem;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                    <span>0328 813 50 10</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section style="position: relative; height: 400px; display: flex; align-items: center; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1400&auto=format&fit=crop" alt="Online İşlemler" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(100deg, rgba(9,32,63,0.95) 0%, rgba(9,32,63,0.65) 60%, rgba(196,160,79,0.3) 100%);"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <span style="display: inline-block; background: var(--champagne); color: var(--navy); font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 30px; margin-bottom: 20px;">DİJİTAL SAÄLIK SİSTEMİ</span>
+            <h1 style="color: #fff; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 14px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">Online İşlemler</h1>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; max-width: 580px; line-height: 1.7;">Tüm Randevu, Muayene ve Sonuçlarınız Parmaklarınızın Ucunda. Hastanemize gelmeden işlemlerinizi güvenle gerçekleştirin.</p>
+        </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="section" style="background: #f8fafc; padding: 70px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span class="hero-label" style="color: var(--navy);">DİJİTAL HİZMETLERİMİZ</span>
+                <h2 class="section-title">İnternetten Yapabileceğiniz İşlemler</h2>
+                <p class="section-subtitle mx-auto">Hastanemizin dijital platformu sayesinde zamanınızı verimli kullanın.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;">
+
+                <!-- Randevu -->
+                <div style="background: #fff; border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(9,32,63,0.09); border: 1px solid rgba(9,32,63,0.07); display: flex; flex-direction: column; gap: 20px; transition: transform 0.25s, box-shadow 0.25s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(9,32,63,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(9,32,63,0.09)'">
+                    <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg,#09203f,#1a3a6b); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="calendar" style="width: 30px; height: 30px; color: var(--champagne);"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Telefonla Randevu</h3>
+                        <p style="color: #64748b; font-size: 0.97rem; line-height: 1.7; margin-bottom: 20px;">Hastanemizde dilediğiniz birim ve uzman hekime hızlıca ulaşmak, danışmak ve kolayca randevu oluşturmak için çağrı hattımıza bağlanın.</p>
+                        <a href="iletisim.html" style="display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #fff; padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none;">
+                            <i data-lucide="phone" style="width: 16px; height: 16px;"></i> İletişim Sayfasına Git
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sonuç Sorgulama -->
+                <div style="background: #fff; border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(9,32,63,0.09); border: 1px solid rgba(9,32,63,0.07); display: flex; flex-direction: column; gap: 20px; transition: transform 0.25s, box-shadow 0.25s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(9,32,63,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(9,32,63,0.09)'">
+                    <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg,#0e7490,#06b6d4); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="microscope" style="width: 30px; height: 30px; color: #fff;"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Sonuç Sorgulama</h3>
+                        <p style="color: #64748b; font-size: 0.97rem; line-height: 1.7; margin-bottom: 20px;">Radyoloji ve Laboratuvar test sonuçlarınıza dilediğiniz yerden anında erişin, geçmiş tahlillerinizi PDF formatında inceleyin.</p>
+                        <a href="laboratuvar-sonuclari.html" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg,#0e7490,#06b6d4); color: #fff; padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none;">
+                            <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i> Tahlil Sonuçlarını Sorgula
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Radyoloji -->
+                <div style="background: #fff; border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(9,32,63,0.09); border: 1px solid rgba(9,32,63,0.07); display: flex; flex-direction: column; gap: 20px; transition: transform 0.25s, box-shadow 0.25s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(9,32,63,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(9,32,63,0.09)'">
+                    <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg,#059669,#34d399); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="scan" style="width: 30px; height: 30px; color: #fff;"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Radyolojik Görüntüleme</h3>
+                        <p style="color: #64748b; font-size: 0.97rem; line-height: 1.7; margin-bottom: 20px;">MR, BT ve Röntgen görüntülerinize hem PC hem de mobil cihazlardan güvenle erişin. Raporlarınızı PDF olarak indirin.</p>
+                        <a href="radyolojik-goruntuleme.html" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg,#059669,#34d399); color: #fff; padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none;">
+                            <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i> Görüntüleme Portalı
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hasta Hakları -->
+                <div style="background: #fff; border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(9,32,63,0.09); border: 1px solid rgba(9,32,63,0.07); display: flex; flex-direction: column; gap: 20px; transition: transform 0.25s, box-shadow 0.25s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(9,32,63,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(9,32,63,0.09)'">
+                    <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg,#7c3aed,#a78bfa); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="file-text" style="width: 30px; height: 30px; color: #fff;"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Hasta Bilgi Formu</h3>
+                        <p style="color: #64748b; font-size: 0.97rem; line-height: 1.7; margin-bottom: 20px;">Hastane öncesinde bilgi formunuzu doldurun, muayene sürecini hızlandırın. KVK aydınlatma metni ve rıza beyanı işlemlerinizi tamamlayın.</p>
+                        <a href="hasta-rehberi.html" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg,#7c3aed,#a78bfa); color: #fff; padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none;">
+                            <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i> Hasta Rehberi
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Info Banner -->
+    <section style="background: linear-gradient(120deg,#09203f 0%,#0d2347 100%); padding: 70px 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                <div style="position: relative; height: 360px; border-radius: 20px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.4);">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop" alt="Dijital güvenlik" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+                    <div style="position: absolute; bottom: 20px; right: 20px; background: var(--champagne); color: var(--navy); padding: 14px 18px; border-radius: 14px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.92rem; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+                        <i data-lucide="shield-check" style="width: 22px; height: 22px;"></i> SSL Güvenli Bağlantı
+                    </div>
+                </div>
+                <div>
+                    <span style="display: inline-block; background: rgba(196,160,79,0.2); color: var(--champagne); font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 30px; margin-bottom: 20px;">GÜVENLİK BİLGİLENDİRMESİ</span>
+                    <h2 style="color: #fff; font-size: 1.8rem; font-weight: 800; margin-bottom: 16px;">Web Åifresi Hakkında<br>Bilgilendirme</h2>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.75; margin-bottom: 28px;">Hasta mahremiyeti ve veri güvenliği en önemli önceliğimizdir. Online hizmetlerimizden yararlanmak için size özel tanımlanmış bir şifre gereklidir.</p>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; gap: 14px; align-items: flex-start;">
+                            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(196,160,79,0.2); border: 1px solid rgba(196,160,79,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="user-check" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6; margin: 0;">İlk ziyaretinizde personelimiz tarafından size özel bir kullanıcı adı ve şifre tanımlanır.</p>
+                        </div>
+                        <div style="display: flex; gap: 14px; align-items: flex-start;">
+                            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(196,160,79,0.2); border: 1px solid rgba(196,160,79,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="lock" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6; margin: 0;">Åifrenizi kimseyle paylaşmayın. Güvenliğiniz için periyodik olarak değiştirmenizi öneririz.</p>
+                        </div>
+                        <div style="display: flex; gap: 14px; align-items: flex-start;">
+                            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(196,160,79,0.2); border: 1px solid rgba(196,160,79,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="help-circle" style="width: 18px; height: 18px; color: var(--champagne);"></i>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6; margin: 0;">Åifrenizi unuttunuzsa 0328 813 50 10 numaralı çağrı merkezimizi arayabilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+                        <!-- <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem; color: var(--text-muted);"> -->
+                     <section style="padding:60px 0; background:#f8fafc;">
+    <div class="container">
+
+        <div style="
+            max-width:850px;
+            margin:auto;
+            background:#fff;
+            border-radius:20px;
+            padding:35px;
+            box-shadow:0 12px 35px rgba(9,32,63,.08);
+            border:1px solid #e2e8f0;
+        ">
+
+            <h3 style="
+                font-size:1.5rem;
+                font-weight:800;
+                color:var(--navy);
+                margin-bottom:12px;
+            ">
+                Åifre Güvenliği
+            </h3>
+
+            <p style="
+                color:#64748b;
+                margin-bottom:25px;
+                line-height:1.7;
+            ">
+                Online işlemleri güvenli şekilde kullanabilmeniz için web şifreniz aşağıdaki kuralları sağlamalıdır.
+            </p>
+
+            <ul style="
+                list-style:none;
+                padding:0;
+                margin:0;
+                display:grid;
+                grid-template-columns:repeat(2,1fr);
+                gap:18px;
+            ">
+
+                <li style="display:flex;align-items:center;gap:10px;">
+                    <i data-lucide="check-circle-2" style="color:#16a34a;"></i>
+                    En az 6 karakter uzunluğu
+                </li>
+
+                <li style="display:flex;align-items:center;gap:10px;">
+                    <i data-lucide="check-circle-2" style="color:#16a34a;"></i>
+                    En az bir büyük harf (A-Z)
+                </li>
+
+                <li style="display:flex;align-items:center;gap:10px;">
+                    <i data-lucide="check-circle-2" style="color:#16a34a;"></i>
+                    En az bir küçük harf (a-z)
+                </li>
+
+                <li style="display:flex;align-items:center;gap:10px;">
+                    <i data-lucide="check-circle-2" style="color:#16a34a;"></i>
+                    En az bir rakam (0-9)
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</section>
+                        <!-- </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="https://www.ibnisinahastanesi.com.tr/ibn-i-sina-hastanesi.png" alt="İbni Sina Hastanesi Logo" style="height: 50px; object-fit: contain;">
+                </a>
+                <p>Modern tıbbın tüm imkanlarını insan odaklı yaklaşımla birleştirerek, güvenilir sağlık hizmeti sunuyoruz.</p>
+                <div class="social-links">
+                    <a href="#"><i data-lucide="facebook"></i></a>
+                    <a href="#"><i data-lucide="twitter"></i></a>
+                    <a href="#"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Kurumsal</h4>
+                <ul>
+                    <li><a href="kurumsal.html">Hakkımızda</a></li>
+                    <li><a href="kurumsal.html">Kalite Politikamız</a></li>
+                    <li><a href="iletisim.html">İş Başvurusu</a></li>
+                    <li><a href="laboratuvar-sonuclari.html">Laboratuvar Sonuçları</a></li>
+                    <li><a href="iletisim.html">Radyolojik Görüntüleme</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Hızlı Bağlantılar</h4>
+                <ul>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                    <li><a href="hasta-rehberi.html">KVK Aydınlatma Metni</a></li>
+                    <li><a href="hasta-rehberi.html">Çerez Politikası</a></li>
+                    <li><a href="hasta-rehberi.html#faq">Sıkça Sorulan Sorular</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>İletişim Bilgileri</h4>
+                <ul>
+                    <li>
+                        <i data-lucide="map-pin"></i>
+                        <span>Merkez Mah. Sağlık Sok. No:12, Osmaniye</span>
+                    </li>
+                    <li>
+                        <i data-lucide="phone"></i>
+                        <span>Call Center: 0328 813 50 10</span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail"></i>
+                        <span>info@ibnisinahastanesi.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 İbni Sina Hastanesi. Tüm hakları saklıdır.</p>
+            <p>Design with health in mind</p>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons Integration -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        // Responsive Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
